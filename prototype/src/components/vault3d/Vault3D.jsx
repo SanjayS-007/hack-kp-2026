@@ -9,6 +9,7 @@ import DiveOverlay from './DiveOverlay';
 import { VAULT_CASES, GRAPH } from '../../data/mockData';
 import { batchInspector, entityInspector, pointFileInspector } from '../../data/inspector';
 import { useCaseStore, setActiveCase } from '../../store/caseStore';
+import { useReportSealed } from '../../store/reportStore';
 import { startDemo } from '../../store/demoStore';
 import { dur } from '../../lib/speed';
 
@@ -31,6 +32,7 @@ function readJoint() {
 export default function Vault3D() {
   const navigate = useNavigate();
   const { created } = useCaseStore();
+  const reportSealed = useReportSealed();
   const reduced = reduceMotion();
 
   const [data, setData] = useState(null);
@@ -275,7 +277,7 @@ export default function Vault3D() {
         view={view}
         createdId={createdId}
         reduced={reduced}
-        reportStatus={createdId ? 'draft' : 'none'}
+        reportStatus={reportSealed ? 'sealed' : createdId ? 'draft' : 'none'}
         fusionThreads={data.threads?.threads || []}
         fusionActive={fusionActive}
         joint={joint}

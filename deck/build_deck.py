@@ -163,6 +163,40 @@ def footer(s, n):
     text(s, 12.2, 7.06, 0.9, 0.3, [[R(str(n), 8, GRAY, False, FONT)]], align=PP_ALIGN.RIGHT)
 
 
+SHOTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "shots")
+
+
+def shot_path(name):
+    p = os.path.join(SHOTS, name)
+    return p if os.path.exists(p) else None
+
+
+def picture(s, name, x, y, w, h=None, border=CYAN, lw=1.25):
+    """Add a screenshot (16:9) with a thin border; falls back to a styled mock panel."""
+    if h is None:
+        h = w * 9.0 / 16.0
+    p = shot_path(name)
+    if p:
+        pic = s.shapes.add_picture(p, Inches(x), Inches(y), Inches(w), Inches(h))
+        if border is not None:
+            pic.line.color.rgb = border
+            pic.line.width = Pt(lw)
+        pic.shadow.inherit = False
+        return pic
+    rect(s, x, y, w, h, fill=PANEL2, line=border, lw=lw, radius=0.03)
+    text(s, x, y, w, h, [[R("[ screenshot pending ]", 11, GRAY, False, FONT)]],
+         align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+    return None
+
+
+def shot_label(s, cx, cy, label, col):
+    """Small badge chip overlaid on a screenshot's lower-left corner."""
+    cw = 0.34 + 0.078 * len(label)
+    rect(s, cx + 0.12, cy - 0.42, cw, 0.3, fill=NAVY, line=col, lw=1.0, radius=0.5)
+    text(s, cx + 0.12, cy - 0.43, cw, 0.3, [[R(label, 9, col, True, FONT_SB)]],
+         align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+
+
 # ----------------------------------------------------------------------------
 # Slide 1 — Title
 # ----------------------------------------------------------------------------
@@ -388,18 +422,27 @@ def s6():
          ["ChromaDB vectors + local Llama (on-prem)", "Citation-grounded, deterministic answers",
           "HERAM hallucination scoring → ECS", "Below-threshold output auto-excluded"]),
     ]
-    x0, y0 = 0.7, 2.15
-    w, h = 5.9, 2.28
-    gx, gy = 0.13, 0.16
+    x0, y0 = 0.7, 2.05
+    w, h = 5.9, 2.12
+    gx, gy = 0.13, 0.14
     for idx, (name, col, bullets) in enumerate(quads):
         r = idx // 2; c = idx % 2
         cx = x0 + c * (w + gx); cy = y0 + r * (h + gy)
         rect(s, cx, cy, w, h, fill=PANEL, line=STROKE, lw=1, radius=0.05)
-        rect(s, cx, cy, w, 0.62, fill=PANEL2, line=None, radius=0.05)
-        oval(s, cx + 0.28, cy + 0.16, 0.3, 0.3, fill=col, line=None)
-        text(s, cx + 0.75, cy, w - 1, 0.62, [[R(name, 14.5, WHITE, True, FONT_SB)]], anchor=MSO_ANCHOR.MIDDLE)
+        rect(s, cx, cy, w, 0.58, fill=PANEL2, line=None, radius=0.05)
+        oval(s, cx + 0.28, cy + 0.14, 0.3, 0.3, fill=col, line=None)
+        text(s, cx + 0.75, cy, w - 1, 0.58, [[R(name, 14.5, WHITE, True, FONT_SB)]], anchor=MSO_ANCHOR.MIDDLE)
         paras = [[R("•  ", 11, col, True, FONT), R(b, 11, LGRAY, False, FONT)] for b in bullets]
-        text(s, cx + 0.35, cy + 0.75, w - 0.6, h - 0.85, paras, space_after=5, line_spacing=1.0)
+        text(s, cx + 0.35, cy + 0.7, w - 0.6, h - 0.8, paras, space_after=4, line_spacing=1.0)
+    # observatory banner
+    by = 2.05 + 2 * h + gy + 0.06
+    rect(s, 0.7, by, 11.93, 0.62, fill=PANEL2, line=CYAN, lw=1.5, radius=0.14)
+    text(s, 1.0, by, 11.4, 0.62,
+         [[R("★ Engine-Room Observatory ", 11.5, CYAN, True, FONT_SB),
+           R("(/aicore): live inference lanes + Model Registry with weight SHA-256 · ", 11, LGRAY, False, FONT),
+           R("Trace-a-Specimen ", 11.5, CYAN, True, FONT_SB),
+           R("follows one file A1→D4 to a court-exhibit chip.", 11, LGRAY, False, FONT)]],
+         anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.0)
     footer(s, 6)
 
 
@@ -489,37 +532,28 @@ def s8():
 def s9():
     s = slide()
     title_block(s, "Demo Walkthrough", "\"Operation Sentinel\"  ·  Case #KP-2026-0417", "08")
-    text(s, 0.7, 1.9, 11.9, 0.4,
-         [[R("Fictional, 100% synthetic case data — no real identities or imagery.", 11.5, GRAY, False, FONT)]])
+    text(s, 0.7, 1.62, 11.9, 0.35,
+         [[R("Six live captures from the running prototype — 100% synthetic case data, no real identities or imagery.",
+             11, GRAY, False, FONT)]])
 
-    steps = [
-        ("1", "Ingest", "Ingest & Triage", "3 seized devices — 2.4 TB, 480k files — auto-triaged in 47 minutes.", CYAN),
-        ("2", "Dashboard", "Risk Queue", "312 items flagged · 14 high-risk · 3 synthetic detected, severity-sorted.", AMBER),
-        ("3", "Entity Graph", "Hidden Link", "Graph reveals a 3rd suspect via crypto peel-chain + shared hash.", VIOLET),
-        ("4", "Timeline", "Chronos Engine", "Reconstructs grooming → production → distribution across devices.", CYAN),
-        ("5", "Ask AEGIS", "RAG Query", "\"Show all comms near Riverside Park in March\" → cited answer.", GREEN),
-        ("6", "Report", "§63 Export", "One-click court report with §63 certificate + SHA-256 manifest.", GREEN),
+    shots = [
+        ("01-vault-3d.png",        "1 · Vault 3D",      CYAN),
+        ("02-genesis-process.png", "2 · Genesis",       AMBER),
+        ("03-aicore.png",          "3 · AI Core",       VIOLET),
+        ("04-ask.png",             "4 · Ask AEGIS",     GREEN),
+        ("05-graph.png",           "5 · Entity Graph",  VIOLET),
+        ("06-report.png",          "6 · Court Report",  GREEN),
     ]
     cols = 3
-    x0, y0 = 0.7, 2.5
-    w, h = 3.87, 1.75
-    gx, gy = 0.16, 0.18
-    for idx, (n, page, name, body, col) in enumerate(steps):
+    x0, y0 = 0.63, 2.35
+    w = 3.9
+    ih = w * 9.0 / 16.0
+    gx, gy = 0.2, 0.2
+    for idx, (fn, label, col) in enumerate(shots):
         r = idx // cols; c = idx % cols
-        cx = x0 + c * (w + gx); cy = y0 + r * (h + gy)
-        rect(s, cx, cy, w, h, fill=PANEL, line=STROKE, lw=1, radius=0.06)
-        # mini screenshot placeholder
-        rect(s, cx + 0.22, cy + 0.22, 1.0, 1.3, fill=PANEL2, line=col, lw=1.25, radius=0.06)
-        rect(s, cx + 0.34, cy + 0.36, 0.76, 0.16, fill=col, line=None, radius=0.3)
-        for k in range(3):
-            rect(s, cx + 0.34, cy + 0.62 + k*0.22, 0.76, 0.1, fill=STROKE, line=None, radius=0.4)
-        text(s, cx + 0.22, cy + 1.28, 1.0, 0.25, [[R(page, 8, GRAY, False, FONT)]], align=PP_ALIGN.CENTER)
-        # step content
-        oval(s, cx + 1.4, cy + 0.2, 0.42, 0.42, fill=col, line=None)
-        text(s, cx + 1.4, cy + 0.2, 0.42, 0.42, [[R(n, 14, NAVY, True, FONT_SB)]],
-             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-        text(s, cx + 1.95, cy + 0.22, w - 2.1, 0.42, [[R(name, 12.5, WHITE, True, FONT_SB)]], anchor=MSO_ANCHOR.MIDDLE)
-        text(s, cx + 1.42, cy + 0.72, w - 1.6, 0.9, [[R(body, 10, GRAY, False, FONT)]], line_spacing=1.05)
+        cx = x0 + c * (w + gx); cy = y0 + r * (ih + gy)
+        picture(s, fn, cx, cy, w, ih, border=col, lw=1.5)
+        shot_label(s, cx, cy + ih, label, col)
     footer(s, 9)
 
 
@@ -551,7 +585,7 @@ def s10():
          [[R("Investigator wellbeing is a first-class design goal — ", 13.5, LGRAY, False, FONT),
            R("sustainable teams clear backlogs, and cleared backlogs rescue children sooner.", 13.5, VIOLET, True, FONT_SB)]],
          anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.05)
-    footer(s, 10)
+    footer(s, 11)
 
 
 # ----------------------------------------------------------------------------
@@ -614,7 +648,7 @@ def s11():
                 elif val == "Yes":
                     run.font.color.rgb = GREEN
             run.font.name = FONT
-    footer(s, 11)
+    footer(s, 12)
 
 
 # ----------------------------------------------------------------------------
@@ -658,7 +692,7 @@ def s12():
         oval(s, 7.35, cy + 0.05, 0.22, 0.22, fill=VIOLET, line=None)
         text(s, 7.75, cy - 0.05, 4.7, 0.35, [[R(t, 11.5, WHITE, True, FONT_SB)]])
         text(s, 7.75, cy + 0.28, 4.7, 0.4, [[R(b, 9.8, GRAY, False, FONT)]], line_spacing=1.0)
-    footer(s, 16)
+    footer(s, 18)
 
 
 # ----------------------------------------------------------------------------
@@ -687,7 +721,7 @@ def s13():
          [[R("HACK-KP 2026", 11.5, GRAY, True, FONT_SB),
            R("   ·   Sovereign · Agentic · Court-Provable Fusion", 11.5, GRAY, False, FONT)]],
          align=PP_ALIGN.CENTER)
-    footer(s, 17)
+    footer(s, 19)
 
 
 # ----------------------------------------------------------------------------
@@ -733,7 +767,7 @@ def sA():
            R("Cellebrite shipped agentic AI in Guardian (2025) — the race is on; the fusion box is still empty.",
              11, GRAY, False, FONT)]],
          anchor=MSO_ANCHOR.MIDDLE)
-    footer(s, 12)
+    footer(s, 13)
 
 
 # ----------------------------------------------------------------------------
@@ -781,7 +815,7 @@ def sB():
           [R("Every reasoning trace is persisted to the audit log — courts can replay the AI's \"thought process.\"",
              11, GRAY, False, FONT)]],
          anchor=MSO_ANCHOR.MIDDLE, space_after=3)
-    footer(s, 13)
+    footer(s, 14)
 
 
 # ----------------------------------------------------------------------------
@@ -827,7 +861,7 @@ def sC():
          [[R("Agency #200 benefits from the experience of 199 others.  ", 12, WHITE, True, FONT_SB),
            R("The Flock Safety pattern: data-network effects → 25× revenue multiples.", 11.5, VIOLET, True, FONT_SB)]],
          anchor=MSO_ANCHOR.MIDDLE)
-    footer(s, 14)
+    footer(s, 16)
 
 
 # ----------------------------------------------------------------------------
@@ -905,7 +939,7 @@ def sD():
         if i < len(gtm) - 1:
             ax = cxx + gw
             line(s, ax + 0.05, gy + 0.25, ax + ggap - 0.05, gy + 0.25, col, 2.5)
-    footer(s, 15)
+    footer(s, 17)
 
 
 def MBLUE_B():
@@ -913,7 +947,101 @@ def MBLUE_B():
 
 
 # ----------------------------------------------------------------------------
-for fn in (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, sA, sB, sC, sD, s12, s13):
+# Slide W — One Continuous World (the demo arc)
+# ----------------------------------------------------------------------------
+def sW():
+    s = slide()
+    title_block(s, "The Demo Arc", "One Continuous World", "08")
+    text(s, 0.7, 1.62, 11.9, 0.35,
+         [[R("The entire demo is a single unbroken take — no cuts, no context-switches. One world, seven beats.",
+             11.5, GRAY, False, FONT)]])
+
+    stages = [
+        ("Vault 3D", "enter the world", CYAN),
+        ("Genesis", "Acquire · Process ·\nAI Core · Analyze · Seal", AMBER),
+        ("Strata", "Lake → Vector →\nGraph → Crown", VIOLET),
+        ("Fusion Threads", "cross-case links\nlight up", GREEN),
+        ("Risk Proofs", "composite score +\ncited evidence", AMBER),
+        ("Dive", "compile → dive\ninto the report", CYAN),
+        ("Sealed Report", "§63 · hash-anchored\nto custody", GREEN),
+    ]
+    n = len(stages)
+    x0 = 0.55
+    usable = 12.25
+    nodeW = 1.5
+    gap = (usable - n * nodeW) / (n - 1)
+    y = 2.75
+    nodeH = 2.0
+    for i, (name, cap, col) in enumerate(stages):
+        cx = x0 + i * (nodeW + gap)
+        rect(s, cx, y, nodeW, nodeH, fill=PANEL, line=col, lw=1.5, radius=0.09)
+        oval(s, cx + nodeW / 2 - 0.26, y + 0.26, 0.52, 0.52, fill=col, line=None)
+        text(s, cx + nodeW / 2 - 0.26, y + 0.26, 0.52, 0.52,
+             [[R(str(i + 1), 16, NAVY, True, FONT_SB)]], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+        text(s, cx + 0.05, y + 0.95, nodeW - 0.1, 0.4, [[R(name, 11.5, WHITE, True, FONT_SB)]],
+             align=PP_ALIGN.CENTER)
+        cap_paras = [[R(ln, 8, GRAY, False, FONT)] for ln in cap.split("\n")]
+        text(s, cx + 0.05, y + 1.34, nodeW - 0.1, 0.6, cap_paras, align=PP_ALIGN.CENTER,
+             line_spacing=0.95, space_after=1)
+        if i < n - 1:
+            ax = cx + nodeW
+            arr = s.shapes.add_shape(MSO_SHAPE.RIGHT_ARROW, Inches(ax + 0.02),
+                                     Inches(y + nodeH / 2 - 0.09), Inches(gap - 0.04), Inches(0.18))
+            arr.fill.solid()
+            arr.fill.fore_color.rgb = CYAN
+            arr.line.fill.background()
+            arr.shadow.inherit = False
+
+    rect(s, 0.7, 5.4, 11.93, 1.1, fill=PANEL2, line=CYAN, lw=1.5, radius=0.12)
+    text(s, 1.0, 5.4, 11.4, 1.1,
+         [[R("\u201CThe chain of custody never breaks — and you can watch it.\u201D", 18, CYAN, True, FONT_SB)]],
+         align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+    footer(s, 10)
+
+
+# ----------------------------------------------------------------------------
+# Slide R — The Report Is The Product (provenance terminus)
+# ----------------------------------------------------------------------------
+def sR():
+    s = slide()
+    title_block(s, "Provenance Terminus", "The Report Is The Product", "13")
+    text(s, 0.7, 1.62, 11.9, 0.35,
+         [[R("Every chain of custody terminates in a document a court can trust — not a web page.",
+             11.5, GRAY, False, FONT)]])
+
+    # report screenshot (left)
+    iw = 6.75
+    ih = iw * 9.0 / 16.0
+    ix, iy = 0.7, 2.45
+    picture(s, "06-report.png", ix, iy, iw, ih, border=CYAN, lw=1.75)
+    shot_label(s, ix, iy + ih, "Court-Ready Report · /report", CYAN)
+
+    # 3 callouts (right)
+    callouts = [
+        ("BSA 2023 §63 Certificate", GREEN,
+         "Auto-filled Part A (device / IMEI / extraction env) + Part B hash attestation, with signature blocks — admissible by construction."),
+        ("ECS Audit — 41 / 42", AMBER,
+         "Every generated statement is HERAM-scored; 1 sentence excluded (0.71 < 0.85 gate) and shown struck-through. Honesty as evidence."),
+        ("Model Registry", VIOLET,
+         "Each engine pinned to KP-2026-0417 with weight SHA-256 hashes — the defence can reproduce every verdict on demand."),
+    ]
+    cx = 7.75
+    cw = 4.88
+    cy = 2.45
+    chh = 1.36
+    cgap = 0.16
+    for name, col, body in callouts:
+        rect(s, cx, cy, cw, chh, fill=PANEL, line=col, lw=1.5, radius=0.07)
+        rect(s, cx, cy + 0.18, 0.07, chh - 0.36, fill=col, line=None, rounded=False)
+        text(s, cx + 0.3, cy + 0.16, cw - 0.5, 0.4, [[R(name, 13, WHITE, True, FONT_SB)]])
+        text(s, cx + 0.3, cy + 0.58, cw - 0.55, chh - 0.65, [[R(body, 9.8, LGRAY, False, FONT)]],
+             line_spacing=1.05)
+        cy += chh + cgap
+    footer(s, 15)
+
+
+# ----------------------------------------------------------------------------
+for fn in (s1, s2, s3, s4, s5, s6, s7, s8, s9, sW, s10, s11, sA, sB, sR, sC, sD, s12, s13):
     fn()
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "AEGIS-pitch.pptx")

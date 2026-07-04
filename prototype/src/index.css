@@ -143,4 +143,13 @@
     border: none !important;
     max-width: 100% !important;
   }
+  .report-section {
+    break-inside: avoid;
+    break-after: page;
+    page-break-after: always;
+  }
+  .report-section:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
 }

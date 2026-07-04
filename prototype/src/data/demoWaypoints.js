@@ -22,4 +22,5 @@ export const WAYPOINTS = [
   { id: 'fusion-view', selector: '[data-demo="fusion-view"]', caption: 'Back in the Vault: Fusion View', note: 'Pull back — cross-case threads arc between islands (3D)' },
   { id: 'fusion-thread', selector: '[data-demo="fusion-thread"]', caption: 'Open the gold thread', note: 'Shared wallet cluster · 0.91 → propose joint investigation' },
   { id: 'compile-report', selector: '[data-demo="compile-report"]', caption: 'Compile Case Report', note: 'Dive down the strata → citations land in the court document' },
+  { id: 'report-seal', selector: '[data-demo="report-seal"]', caption: 'Sign & Seal the report', note: 'Signatures fill → watermark dissolves → vault crown flips green' },
 ];

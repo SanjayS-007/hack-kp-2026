@@ -1,56 +1,85 @@
-AEGIS-X — Operation Sentinel — Voiceover Narration (TTS / recording master) — 2:00 CUT
+AEGIS-X — Operation Sentinel — Voiceover Narration (TTS / recording master) — STRICT 2:00 FINAL CUT (vNEXT)
 
-Instructions for reader/TTS: Calm, measured, documentary authority. Never breathless. Read at ~140 words per minute. This is a tight 2-minute cut (~250 words) — do not rush, but keep momentum. Honor every [PAUSE]. The [SILENCE - GNN SPINNER] beat is a deliberate ~2-second gap where no narration plays while the on-screen link-prediction spinner runs — let the reveal land in quiet. All case data is fictional.
+Instructions for reader/TTS: Calm, measured, documentary authority. Never breathless. Read at ~140 words per
+minute. This is a tight 2-minute cut (264 words) — do not rush, but keep momentum. Honor every [PAUSE].
+There are TWO deliberate silence beats where NO narration plays and the visuals carry alone:
+  • [SILENCE - REPORT DIVE] — the camera dives down through the strata into the assembling court report.
+  • [SILENCE - GNN SPINNER] — the link-prediction spinner runs and the hidden suspect surfaces (hold >= 1.5s).
+Let both reveals land in quiet. All case data, names, media and numbers are 100% fictional and synthetic.
+
+===================================================================================================
+
+[HOOK]  (0:00-0:08)
 
 Two point four terabytes. Four hundred eighty thousand files.
 
 [PAUSE]
 
-By hand — nine months. Children can't wait nine months.
+Nine months by hand. AEGIS-X: forty-seven minutes.
 
 [PAUSE]
 
-Meet AEGIS-X. It starts in the vault — a new case.
+[GENESIS]  (0:08-0:35)
+
+It begins in the Fusion Vault. Open a new case — drag in three seized forensic images, sealed with a
+SHA-256 hash at the very first touch.
 
 [PAUSE]
 
-Three seized forensic images — dragged in and sealed with a SHA-256 hash at the very first touch. Chain of custody from the first touch.
+The pipeline carves, hashes, and triages; four AI lanes light, and a verifier seals the batch — custody
+unbroken.
 
 [PAUSE]
 
-The pipeline carves, hashes, normalizes, and triages — four hundred eighty thousand files in minutes. Integrity report — every artifact sealed, custody unbroken.
+Name it Operation Sentinel, and the case island rises into the vault.
 
 [PAUSE]
 
-Name it — Operation Sentinel — and seal it into the vault.
+[FUSION VAULT]  (0:35-1:00)
+
+Ask the vault a question — the probe dives into the evidence constellation, and the top matches fly back as
+cited answers.
 
 [PAUSE]
 
-Inside — three hundred twelve flagged, fourteen high-risk, the risk queue pushing active harm to the top.
+Pull back, and gold threads link this case to another: a shared wallet cluster at ninety-one percent —
+propose a joint investigation.
 
 [PAUSE]
 
-Ask AEGIS anything. But before it answers — watch it show its work. Plan, graph query, vector search, vision check, then a verifier re-derives every claim against sealed evidence. Every step audited — then the cited answer.
+The crown scores the risk, every point traceable — then compile the case report.
+
+[REPORT CLOSE]  (1:00-1:20)
+
+[SILENCE - REPORT DIVE ~2 SECONDS]
+
+The intelligence pours down the strata and assembles into a court document.
 
 [PAUSE]
 
-The graph shows what we've confirmed. Now — run link prediction.
+A proof tree traces one claim to sealed evidence, a section sixty-three certificate is signed and sealed —
+and the vault's gem turns green. The chain is closed.
 
-[SILENCE - GNN SPINNER ~2 SECONDS]
+[DEPTH FLASH]  (1:20-1:45)
 
-A hidden third suspect — surfaced by a crypto peel-chain and a shared hash. The link no human made.
-
-[PAUSE]
-
-Hash-matching only catches the known. AEGIS-X re-analyzes four streams and catches the synthetic — ninety-eight percent, confirmed.
+Grad-CAM reveals the model's reasoning; the agent shows its work, and a verifier re-derives every claim.
 
 [PAUSE]
 
-And for court — one click. Forty-one of forty-two statements grounded in sealed evidence. A section sixty-three certificate. A SHA-256 chain of custody. Defensible.
+The graph shows what we've confirmed — now, run link prediction.
+
+[SILENCE - GNN SPINNER ~1.5 SECONDS]
+
+A hidden third suspect, surfaced by a crypto peel-chain: the link no human made.
 
 [PAUSE]
 
-Ninety-one percent less traumatic exposure for investigators. Forty-seven minutes, not nine months. A child safeguarded.
+Four streams catch the synthetic at ninety-eight percent — and three hundred seventy-five thousand files
+were auto-cleared, never seen by a human eye.
+
+[IMPACT & CLOSE]  (1:45-2:00)
+
+Ninety-one percent less traumatic exposure. Forty-seven minutes, not nine months. A child safeguarded.
 
 [PAUSE]
 
@@ -59,3 +88,7 @@ And every deployment makes every other agency stronger — without a single file
 [PAUSE]
 
 AEGIS-X. From terabytes to testimony — in hours, not months.
+
+===================================================================================================
+Word count (spoken words only, excluding markers/headers): 264 words  ·  under the 280 cap.
+Two protected silence beats: REPORT DIVE (Scene 14) and GNN SPINNER (Scene 20).
