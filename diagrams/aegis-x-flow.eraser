@@ -1,0 +1,122 @@
+// AEGIS-X — Complete System & Experience Flow
+// Paste into eraser.io (Diagram-as-code → Flow chart)
+// Elegant top-to-bottom: Acquisition → Genesis → AI Core → Fusion Vault 3D → Investigator Console → Court Report
+
+direction down
+colorMode bold
+styleMode shadow
+typeface clean
+
+// ── 1. EVIDENCE ACQUISITION ─────────────────────────────
+Acquisition [color: blue] {
+  Local Forensic [icon: hard-drive, label: "Local / Forensic Image (.E01 .UFDR)"]
+  Network Remote [icon: globe, label: "Network / URL (CyberTipline, warrant)"]
+  Live Field [icon: video, label: "Live Stream / Edge Kit E-KIT-07"]
+  Cloud Locker [icon: cloud, label: "Cloud Evidence Locker"]
+}
+
+Seal Gate [shape: diamond, icon: lock, color: teal, label: "First-Touch Seal — SHA-256 + ML-DSA (PQC), write-blocked"]
+
+Local Forensic > Seal Gate
+Network Remote > Seal Gate
+Live Field > Seal Gate
+Cloud Locker > Seal Gate
+
+// ── 2. GENESIS PIPELINE ─────────────────────────────────
+Genesis Pipeline [color: purple] {
+  Carving [icon: scissors]
+  Hashing [icon: hash, label: "Hashing (PhotoDNA + SHA-256)"]
+  VICS Normalize [icon: file-text, label: "VICS JSON Normalize"]
+  Metadata Extract [icon: tag, label: "Metadata / EXIF / C2PA"]
+}
+
+Seal Gate > Carving
+Carving > Hashing
+Hashing > VICS Normalize
+VICS Normalize > Metadata Extract
+
+// ── 3. AI CORE — THE ENGINE ROOM ────────────────────────
+AI Core Engine Room [color: red, label: "AI CORE — Engine Room (Confidential-GPU Enclave, Attested)"] {
+  Router [shape: diamond, icon: git-branch, label: "Modality Router"]
+
+  Lane A Visual [color: orange] {
+    Known Hash Prefilter [icon: fingerprint, label: "A1 Known-Hash Prefilter — 78.2% auto-disposed"]
+    Hybrid Classifier [icon: eye, label: "A2 ConvNeXt-T + Swin-T · Grad-CAM XAI"]
+    Human Perception [icon: user, label: "A3 YOLO-Pose + Age-KDE"]
+    Synthetic Shield [icon: shield, label: "A4 C2PA → SynthID → 3-Stream Deepfake"]
+  }
+
+  Lane B Language [color: yellow] {
+    OCR NER [icon: type, label: "B1-B2 OCR + NER / Coded Lexicon"]
+    Embed Index [icon: layers, label: "B4 Chunk → Embed (MiniLM) → Index"]
+  }
+
+  Lane C Temporal [color: green] {
+    Clock Align [icon: clock, label: "C1 Clock-Skew / Stratigraphy (FSA)"]
+    Behavior Anomaly [icon: activity, label: "C2 TAGNN Behavior Anomaly"]
+  }
+
+  Verifier Agent [shape: diamond, icon: check-circle, color: yellow, label: "VERIFIER AGENT — every claim re-derived, audit-logged"]
+}
+
+Metadata Extract > Router
+Router > Known Hash Prefilter: images / video
+Known Hash Prefilter > Hybrid Classifier: unknowns only
+Hybrid Classifier > Human Perception
+Human Perception > Synthetic Shield
+Router > OCR NER: text / chats
+OCR NER > Embed Index
+Router > Clock Align: events / logs
+Clock Align > Behavior Anomaly
+Synthetic Shield > Verifier Agent
+Embed Index > Verifier Agent
+Behavior Anomaly > Verifier Agent
+
+// ── 4. FUSION VAULT — 3D STRATA (one world per case) ────
+Fusion Vault 3D [color: teal, label: "FUSION VAULT — 3D Strata World (sovereign, WORM)"] {
+  Stratum 1 Lake [icon: database, label: "S1 Evidence Lake — sealed blocks, 0 mutations"]
+  Stratum 2 Vectors [icon: box, label: "S2 Vector Constellation — ChromaDB 480k embeddings"]
+  Stratum 3 Graph [icon: share-2, label: "S3 Knowledge Graph — Neo4j 38 entities / 91 edges"]
+  Stratum 4 Crown [icon: award, label: "S4 Intelligence Crown — risk 97 + proof chips"]
+}
+
+Seal Gate > Stratum 1 Lake: raw objects (WORM)
+Verifier Agent > Stratum 2 Vectors: verified embeddings
+Verifier Agent > Stratum 3 Graph: verified entities & edges
+Verifier Agent > Stratum 4 Crown: composite risk (content+behavior+network+recency)
+Stratum 1 Lake > Stratum 2 Vectors: evidence becomes meaning
+Stratum 2 Vectors > Stratum 3 Graph: entities emerge
+Stratum 3 Graph > Stratum 4 Crown: patterns become leads
+
+// Cross-case fusion (GNN threads between case islands)
+Other Case Islands [icon: package, color: teal, label: "Harbor Watch · Night Courier (same-agency vault)"]
+Stratum 3 Graph <> Other Case Islands: GNN cross-case threads — wallet 0.91 · lexicon 0.84 · hash 1.00
+Other Case Islands - Joint Investigation [icon: users, label: "JOINT-2026-0091 proposed"]
+
+// ── 5. INVESTIGATOR CONSOLE ─────────────────────────────
+Investigator Console [color: blue] {
+  Ask The Vault [icon: message-circle, label: "Ask AEGIS / Vault — RAG probe → top-k → cited answer (ECS ≥ 0.85)"]
+  Visual Triage [icon: grid, label: "Visual Triage — blurred, XAI, 91% less exposure"]
+  Entity Graph 2D [icon: git-merge, label: "Entity Graph — GNN reveal (Subject-C)"]
+  Timeline Chronos [icon: calendar, label: "Timeline — phase bands, skew-corrected"]
+  Risk Queue [icon: list, label: "Risk Queue — SLA escalation"]
+  Artifact Inspector [icon: search, label: "Universal Artifact Inspector — strata trail + pivots"]
+}
+
+Stratum 2 Vectors > Ask The Vault: retrieval (probe → flare → citations)
+Stratum 3 Graph > Entity Graph 2D: open full explorer
+Stratum 4 Crown > Risk Queue: prioritized leads
+Ask The Vault <> Artifact Inspector
+Visual Triage <> Artifact Inspector
+Entity Graph 2D <> Artifact Inspector
+Timeline Chronos <> Artifact Inspector
+
+// ── 6. COURT REPORT — THE TERMINUS ──────────────────────
+Court Report [icon: file-text, color: green, label: "COURT REPORT — strata dive → §63 cert → proof trees → ECS audit (41/42) → Sign & Seal"]
+
+Stratum 4 Crown > Court Report: Compile — cinematic strata dive
+Artifact Inspector > Court Report: Add to report
+Court Report > Stratum 4 Crown: sealed status gem flips green (chain closed)
+
+Courtroom [shape: oval, icon: home, color: green, label: "Court-Provable Output — reproducible, attested, admissible"]
+Court Report > Courtroom

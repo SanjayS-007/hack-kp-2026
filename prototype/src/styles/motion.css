@@ -1,0 +1,331 @@
+/* AEGIS-X motion — route transitions, focus, reduced-motion */
+
+@keyframes marquee-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Shared-axis slide transitions (genesis wizard) */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(44px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideOutLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-44px);
+  }
+}
+.anim-in-right {
+  animation: slideInRight 420ms var(--ease-out);
+}
+.anim-out-left {
+  animation: slideOutLeft 420ms var(--ease-out) forwards;
+}
+
+/* Living-architecture light pulse */
+@keyframes archPulse {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* Seal ceremony particle burst */
+@keyframes burst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--bx), var(--by)) scale(0.2);
+    opacity: 0;
+  }
+}
+@keyframes sealRing {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+    box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.6);
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+    box-shadow: 0 0 0 24px rgba(52, 211, 153, 0);
+  }
+}
+
+.page-enter {
+  animation: pageEnter var(--dur-page) var(--ease-out);
+}
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Focus-visible ring on every interactive element */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Honor reduced-motion — disable nonessential animation */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── AI Core "Engine Room" ─────────────────────────────────────── */
+/* Router → lane particle flow (speed-aware via --speed-mult) */
+@keyframes aiFlow {
+  0% {
+    offset-distance: 0%;
+    left: 0%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+.ai-particle {
+  position: absolute;
+  top: 50%;
+  height: 5px;
+  width: 5px;
+  border-radius: 9999px;
+  transform: translateY(-50%);
+  animation: aiFlow calc(2600ms / var(--speed-mult)) linear infinite;
+}
+/* reduced-motion: particles collapse into a static gradient conduit */
+@media (prefers-reduced-motion: reduce) {
+  .ai-particle {
+    display: none;
+  }
+}
+
+@keyframes aiGlowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 211, 238, 0);
+  }
+  50% {
+    box-shadow: 0 0 16px 1px rgba(34, 211, 238, 0.35);
+  }
+}
+.ai-active-glow {
+  animation: aiGlowPulse calc(2400ms / var(--speed-mult)) ease-in-out infinite;
+}
+
+@keyframes aiGoldPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 196, 81, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px 2px rgba(245, 196, 81, 0.45);
+  }
+}
+.ai-gold-glow {
+  animation: aiGoldPulse calc(2200ms / var(--speed-mult)) ease-in-out infinite;
+}
+
+@keyframes aiStamp {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.ai-stamp {
+  animation: aiStamp calc(320ms / var(--speed-mult)) var(--ease-out);
+}
+
+@keyframes aiHeartPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.14);
+    opacity: 1;
+  }
+}
+.ai-heart {
+  animation: aiHeartPulse calc(2000ms / var(--speed-mult)) ease-in-out infinite;
+}
+
+/* ── Demo Mode ─────────────────────────────────────────────────── */
+/* Pause freezes every running CSS animation. */
+.demo-paused *,
+.demo-paused *::before,
+.demo-paused *::after {
+  animation-play-state: paused !important;
+}
+
+/* Spotlight halo ring pulse */
+@keyframes demoHalo {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.9), 0 0 22px 4px rgba(34, 211, 238, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(34, 211, 238, 0.55), 0 0 34px 8px rgba(34, 211, 238, 0.7);
+  }
+}
+.demo-halo {
+  animation: demoHalo calc(1600ms / var(--speed-mult)) ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-halo {
+    animation: none;
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.9);
+  }
+}
+
+/* ── Report Compile dive (v6c) ─────────────────────────────────── */
+/* Citation chip detaches from a stratum and streams toward screen bottom. */
+@keyframes diveStream {
+  0% {
+    transform: translate(-50%, 0) scale(0.9);
+    opacity: 0;
+  }
+  14% {
+    opacity: 1;
+  }
+  86% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 46vh) scale(1.04);
+    opacity: 0;
+  }
+}
+.dive-chip {
+  animation: diveStream calc(2200ms / var(--speed-mult)) var(--ease-out) forwards;
+}
+
+/* Vertical dive scrim wipe (S4→S1). */
+@keyframes diveWipe {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.28;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+.dive-scrim {
+  animation: diveWipe calc(2600ms / var(--speed-mult)) linear forwards;
+}
+
+/* Layer flash as the camera passes a stratum. */
+@keyframes diveFlash {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+.dive-flash {
+  animation: diveFlash calc(600ms / var(--speed-mult)) ease-in-out;
+}
+
+/* Citation chip lands from the stream into a report section. */
+@keyframes citationLand {
+  0% {
+    transform: translateY(-38px) scale(1.05);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(2px) scale(0.96);
+  }
+}
+.citation-land {
+  animation: citationLand calc(1400ms / var(--speed-mult)) var(--ease-out) forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dive-chip,
+  .dive-scrim,
+  .dive-flash,
+  .citation-land {
+    animation: none;
+  }
+}
+
+/* Cursor click ripple */
+@keyframes demoRipple {
+  from {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0.8;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(2.4);
+    opacity: 0;
+  }
+}
+.demo-ripple {
+  animation: demoRipple calc(600ms / var(--speed-mult)) var(--ease-out) forwards;
+}
+
+

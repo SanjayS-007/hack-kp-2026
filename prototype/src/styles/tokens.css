@@ -1,0 +1,62 @@
+/* AEGIS-X design tokens — layered depth, offline-safe */
+:root {
+  /* Color — layered depth */
+  --bg-root: #060b18;
+  --bg-surface-1: #0b1424;
+  --bg-surface-2: #101b30;
+  --bg-surface-3: #16233c;
+
+  --stroke-subtle: rgba(148, 163, 184, 0.08);
+  --stroke-strong: rgba(148, 163, 184, 0.16);
+
+  --accent: #22d3ee;
+  --accent-2: #818cf8;
+
+  --risk-a: #f43f5e;
+  --risk-b: #f59e0b;
+  --risk-c: #eab308;
+  --ok: #34d399;
+  --review: #38bdf8;
+
+  --text-hi: #e7edf7;
+  --text-mid: #9fb0c7;
+  --text-low: #64748b;
+
+  /* Elevation */
+  --shadow-2: 0 8px 24px rgba(2, 6, 17, 0.45);
+  --shadow-3: 0 16px 48px rgba(2, 6, 17, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-hover: 150ms;
+  --dur-panel: 260ms;
+  --dur-page: 420ms;
+
+  /* Demo speed engine — HUD slider writes this live (0.5×–2×). 1 = normal. */
+  --speed-mult: 1;
+}
+
+/* Page base with fixed radial vignette + turbulence noise (inline, offline-safe) */
+body {
+  background-color: var(--bg-root);
+  background-image:
+    radial-gradient(1200px 600px at 20% 0%, rgba(34, 211, 238, 0.05), transparent 60%),
+    radial-gradient(1000px 600px at 80% 100%, rgba(129, 140, 248, 0.05), transparent 60%);
+  background-attachment: fixed;
+}
+
+/* 2% turbulence noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}

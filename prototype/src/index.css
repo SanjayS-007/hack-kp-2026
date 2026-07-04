@@ -1,0 +1,146 @@
+/* Self-hosted fonts (offline-safe, bundled by Vite — no runtime network) */
+@import '@fontsource-variable/inter';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+@import '@fontsource/jetbrains-mono/600.css';
+
+/* Design tokens + motion */
+@import './styles/tokens.css';
+@import './styles/motion.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply font-sans antialiased;
+    color: var(--text-hi);
+    font-size: 13.5px;
+    line-height: 1.55;
+    font-weight: 450;
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+  }
+  h1 {
+    letter-spacing: -0.02em;
+  }
+  /* Numerals everywhere read as tabular */
+  .mono,
+  .tabular {
+    font-family: '"JetBrains Mono"', 'JetBrains Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #1a2c4a transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1a2c4a;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #243a5e;
+  }
+  ::selection {
+    background: rgba(34, 211, 238, 0.25);
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* Elevation tiers */
+  .card-1 {
+    @apply rounded-xl bg-surface-1;
+    border: 1px solid var(--stroke-subtle);
+  }
+  .card {
+    @apply rounded-xl bg-surface-1;
+    border: 1px solid var(--stroke-strong);
+    box-shadow: var(--shadow-2);
+  }
+  .card-3 {
+    @apply rounded-xl bg-surface-2;
+    border: 1px solid var(--stroke-strong);
+    box-shadow: var(--shadow-3);
+  }
+  .card-hover {
+    transition: transform var(--dur-hover) var(--ease-out), border-color var(--dur-hover) var(--ease-out),
+      box-shadow var(--dur-hover) var(--ease-out);
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    border-color: rgba(34, 211, 238, 0.35);
+    box-shadow: var(--shadow-3);
+  }
+
+  .kpi-value {
+    @apply font-mono font-bold tracking-tight text-white;
+    font-variant-numeric: tabular-nums;
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide;
+  }
+
+  /* Page-header helpers */
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-label;
+    color: var(--text-low);
+  }
+  .section-label {
+    @apply text-[13px] font-semibold uppercase tracking-label;
+    color: var(--text-mid);
+  }
+
+  .grid-bg {
+    background-image: linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .dot-bg {
+    background-image: radial-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .glass {
+    background: rgba(8, 16, 31, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* Print — hide app chrome, let the paper artifact fill the page */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body,
+  #root,
+  main {
+    background: #fff !important;
+    overflow: visible !important;
+  }
+  body::before {
+    display: none !important;
+  }
+  .paper {
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 100% !important;
+  }
+}
