@@ -21,26 +21,44 @@ Case **KP-2026-0417 · "Operation Sentinel"**.
 
 ## Run
 
-```powershell
-cd C:\Users\2504690\hack-kp-2026\prototype
+Prerequisite: **Node ≥ 20** (developed on Node v24). No GPU, database or internet needed at runtime —
+all fonts/assets are bundled. Same commands on Windows, macOS and Linux (run from `prototype/`):
+
+```bash
 npm install          # first time only
 npm run dev          # dev server -> http://localhost:5173
 ```
 
 Production build / preview (recommended for the demo — no dev-server hiccups):
 
-```powershell
+```bash
 npm run build        # outputs dist/  (verified: builds clean, 0 console errors)
 npm run preview      # serve the production build -> http://localhost:4173
 ```
 
-Requires Node 18+ (developed on Node v24). **Offline-safe** — all fonts/assets bundled, zero runtime network calls.
+Available scripts (`package.json`): `dev` · `build` · `preview` · `lint` (oxlint).
+**Offline-safe** — zero runtime network calls.
 
-### Keyboard & presenter rails
-- **Keys `0`–`9`** jump between modules (Case Vault…Court Report). Full `focus-visible` ring nav; `prefers-reduced-motion` honored.
-- **`▶ Demo` / `D`** — start the presenter-driven Demo Mode (spotlight + cursor FX + speed HUD).
-- **`?reset`** — append to any URL (e.g. `http://localhost:4173/?reset`) to hard-clear all
-  session state between demo takes.
+### Troubleshooting
+| Symptom | Fix |
+|---|---|
+| Port 5173 busy | `npm run dev -- --port 5273` (any free port) |
+| No WebGL / old GPU | Append `?flat` to the URL → 2D card-grid vault fallback |
+| Slow machine | Turn on the OS "reduce motion" setting — `prefers-reduced-motion` is honored |
+| Blank 3D canvas | Refresh once (WebGL context occasionally needs a second init) |
+
+### Keyboard & URL params
+| Key / param | Action |
+|---|---|
+| **`0`–`9`** | Jump between modules (Case Vault → Court Report); `focus-visible` ring nav |
+| **`D`** / ▶ Demo | Start the presenter-driven Demo Mode (spotlight + cursor FX + speed HUD) |
+| **`Space`** | Pause / resume the demo |
+| **`[`** / **`]`** | Speed down / up (0.5×–2×; also the HUD slider) |
+| **`→`** (ArrowRight) | Force-advance to the next waypoint |
+| **`Esc`** | Exit Demo Mode |
+| **`?reset`** | Append to any URL to hard-clear all session state between takes |
+| **`?flat`** | Force the 2D vault (no-WebGL fallback) |
+
 - The demo is **deterministic theater**: click the suggested-prompt chips / buttons, never free-type.
 - If asked "is this live AI?": *"The console is fully working software; inference is simulated for
   this demo — the models and architecture are specified and research-validated, integration is our
@@ -123,21 +141,37 @@ case mini-rail (click = camera flight), ⊕ New Case, ▶ Demo, stratum breadcru
 
 ---
 
-## Suggested demo-video click-path (~2 min, vault-first)
-1. **Case Vault (3D)** — land in the Fusion Vault world; point at the three case islands + strata. Click **⊕ New Case** *(or **▶ Demo**)*. *(Append `?flat` for the 2D grid fallback.)*
-2. **Genesis · Acquire** — the **Local** modality is open; **drag the "Seizure bundle" chip into the dropzone** (seals SHA-256 onto all 3 forensic images) → **Begin Ingestion**.
-3. **Genesis · Process** — watch the 5-node pipeline auto-run (~8s): counters tick to 480,231, GPUs flicker, log scrolls; it auto-advances.
-4. **Genesis · AI Core** — the engine-room pass auto-runs (~7s): the 4 inference lanes light **A → B → C → D**, counters spin, the **Verifier Agent** seals the batch; it auto-advances.
-5. **Genesis · Analyze** — one glance: "480,231 / 480,231 sealed · chain of custody UNBROKEN", stat cards, and the **living architecture** pulse. Click **Create Case Vault**.
-6. **Genesis · Seal** — the number **slot-machines to KP-2026-0417**; type **Operation Sentinel** and click **Seal into Vault** (lock ceremony).
-7. **Case Vault** — the **Operation Sentinel** card materializes with **"Sealed just now"**. Click it → console **Dashboard**.
-8. **Case Dashboard** — KPIs: *480,231 files triaged in 47 min, 312 flagged, 14 high-risk, 3 synthetic.* Live feed, ticking ingest, count-up donut.
-9. **Visual Triage** — green **"AI reduced human review by 91%"** banner; toggle **Grad-CAM**; open the **Needs Review** filter (self-flagged 61.7% / 64.3%).
-10. **AI Core** *(differentiator)* — the observatory: router → 4 lanes → **Verifier Agent** (gold). Open an engine drawer (spec + sample artifact), then **Trace a Specimen — Follow FILE-2291** → amber particle A1→A2→A3→A4→D1→D4 → court-exhibit chip.
-11. **Ask AEGIS** *(centerpiece)* — click *"Summarize what we know about Subject-B"*: the **agent trace** (Cypher + ms) plays, answer streams, citations + **ECS** stamp; then *"Is there any financial link…"* **reveals Subject-C**.
-12. **Entity Graph** — **Run GNN Link Prediction** → spinner → 3 dashed edges (0.89/0.84/0.77) + **Subject-C pulses** + toast.
-11. **Synthetic → Risk Queue → Court Report** — Re-analyze verdict 98.2%; SLA-escalated lead; **Generate report** → paper §63 cert + "HERAM 41/42".
-12. **Close:** *"Victim safeguarded in 72 hours vs a typical 9 months."* Use `?reset` before the next take.
+## Demo Mode click-path (22 waypoints — the source of truth is `src/data/demoWaypoints.js`)
+Press **`D`** / **▶ Demo**; the spotlight marks each target and your real click advances it (nothing
+auto-navigates between phases). Use **`→`** to force-advance, the speed slider / **`[` `]`** to pace it,
+and **`?reset`** between takes.
+
+| # | Phase | Spotlighted click → what happens |
+|---|-------|----------------------------------|
+| 1 | Vault | **New Case** → open Genesis intake |
+| 2 | Acquire | Drag the **seizure bundle** → seals SHA-256 onto every file |
+| 3 | Acquire | **Begin Ingestion** → Process + AI Core auto-run (~15s), just watch |
+| 4 | Analyze | **Create Case Vault** → integrity verified, chain of custody UNBROKEN |
+| 5 | Seal | **Name the case** (the only typing in the demo) |
+| 6 | Seal | **Seal into Vault** → number mints to KP-2026-0417, lock ceremony |
+| 7 | Console | **Open the sealed case** → enter the console (Dashboard) |
+| 8 | Ask AEGIS | Nav → **Ask AEGIS** |
+| 9 | Ask AEGIS | **Ask about Subject-B** → agent trace (Cypher + ms) + citations + ECS |
+| 10 | Entity Graph | Nav → **Entity Graph** |
+| 11 | Entity Graph | **Run GNN Link Prediction** → reveals hidden **Subject-C** |
+| 12 | Synthetic | Nav → **Synthetic Detection** (DeepFake Shield) |
+| 13 | Synthetic | **Re-analyze** → 3-stream verdict 98.2% |
+| 14 | Court Report | Nav → **Court Report** |
+| 15 | Court Report | **Generate report** → HERAM 41/42 grounded |
+| 16 | Fusion Vault | **Back to the Vault** (click the case chip) → pull back to 3D |
+| 17 | Fusion Vault | **Fusion View** → cross-case threads arc between islands |
+| 18 | Fusion Vault | **Open the gold thread** → shared wallet cluster · 0.91 |
+| 19 | Fusion Vault | **Propose joint investigation** → JOINT-2026-0091 |
+| 20 | Fusion Vault | **Rise to the Intelligence Crown** → risk proof opens |
+| 21 | Fusion Vault | **Compile Case Report** → dive strata, citations land in the doc |
+| 22 | Seal | **Sign & Seal** → signatures fill, DRAFT watermark dissolves, crown flips green |
+
+**Close line:** *"Victim safeguarded in 72 hours vs a typical 9 months."*
 
 ### The 7 Laws of the illusion (implemented)
 Nothing is instant (staged latency everywhere) · never 100% confident (calibrated decimals, uncertainty) ·
