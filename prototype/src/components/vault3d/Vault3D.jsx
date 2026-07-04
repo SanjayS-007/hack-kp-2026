@@ -17,6 +17,38 @@ const BASE = import.meta.env.BASE_URL || '/';
 const STRATUM_BY_POSE = { P2: 'lake', P3: 'constellation', P4: 'graph', P5: 'crown' };
 const JOINT_KEY = 'aegisx.joint';
 
+// Module-level cache so returning to the Vault (console → vault, seal → vault) remounts
+// instantly instead of re-fetching every dataset and flashing "Materializing…".
+let DATA_CACHE = null;
+let DATA_PROMISE = null;
+function loadVaultData() {
+  if (DATA_CACHE) return Promise.resolve(DATA_CACHE);
+  if (DATA_PROMISE) return DATA_PROMISE;
+  const j = (f) => fetch(`${BASE}vault-data/${f}`).then((r) => r.json());
+  DATA_PROMISE = Promise.all([
+    j('lake-blocks.json'),
+    j('constellation-0417.json'),
+    j('constellation-0398.json'),
+    j('constellation-0311.json'),
+    j('graph3d-0417.json'),
+    j('fusion-threads.json'),
+  ])
+    .then(([lake, c0417, c0398, c0311, g0417, threads]) => {
+      DATA_CACHE = {
+        lake,
+        constellation: { 'KP-2026-0417': c0417, 'KP-2026-0398': c0398, 'KP-2026-0311': c0311 },
+        graph3d: { 'KP-2026-0417': g0417 },
+        threads,
+      };
+      return DATA_CACHE;
+    })
+    .catch(() => {
+      DATA_CACHE = { error: true };
+      return DATA_CACHE;
+    });
+  return DATA_PROMISE;
+}
+
 const reduceMotion = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -35,7 +67,7 @@ export default function Vault3D() {
   const reportSealed = useReportSealed();
   const reduced = reduceMotion();
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(DATA_CACHE);
   const [view, setView] = useState({ pose: 'P0', focus: null, expandedGraph: false, askActive: false, askTopk: [] });
   const [askOpen, setAskOpen] = useState(false);
   const [proofsOpen, setProofsOpen] = useState(false);
@@ -54,28 +86,12 @@ export default function Vault3D() {
   const createdId = created?.id || null;
   const nodeById = useMemo(() => Object.fromEntries(GRAPH.nodes.map((n) => [n.id, n])), []);
 
-  // load precomputed datasets once
+  // load precomputed datasets once (module-cached across mounts)
   useEffect(() => {
     let alive = true;
-    const j = (f) => fetch(`${BASE}vault-data/${f}`).then((r) => r.json());
-    Promise.all([
-      j('lake-blocks.json'),
-      j('constellation-0417.json'),
-      j('constellation-0398.json'),
-      j('constellation-0311.json'),
-      j('graph3d-0417.json'),
-      j('fusion-threads.json'),
-    ])
-      .then(([lake, c0417, c0398, c0311, g0417, threads]) => {
-        if (!alive) return;
-        setData({
-          lake,
-          constellation: { 'KP-2026-0417': c0417, 'KP-2026-0398': c0398, 'KP-2026-0311': c0311 },
-          graph3d: { 'KP-2026-0417': g0417 },
-          threads,
-        });
-      })
-      .catch(() => alive && setData({ error: true }));
+    loadVaultData().then((d) => {
+      if (alive) setData(d);
+    });
     return () => {
       alive = false;
     };
@@ -84,7 +100,7 @@ export default function Vault3D() {
   useEffect(() => {
     if (bootstrapped.current || !data) return;
     bootstrapped.current = true;
-    if (createdId) bootTimer.current = setTimeout(() => setView((v) => ({ ...v, pose: 'P1', focus: createdId })), dur(400));
+    if (createdId) bootTimer.current = setTimeout(() => setView((v) => ({ ...v, pose: 'P1', focus: createdId })), dur(150));
   }, [data, createdId]);
 
   const datasets = useMemo(() => {
@@ -220,11 +236,21 @@ export default function Vault3D() {
       /* ignore */
     }
     setJoint(j);
+    // Focus the primary case so the Crown breadcrumb (→ Risk Proof → Compile) is reachable.
+    const primary = createdId || 'KP-2026-0417';
+    setView((v) => ({ ...v, focus: primary }));
   };
 
   // ── Report Compile — strata → report cinematic dive (v6c) ─────
   const compileReport = () => {
     const focus = view.focus || 'KP-2026-0417';
+    // Persist the compile intent so the report still auto-assembles even if the
+    // WebGL canvas teardown forces a reload (router state would be lost otherwise).
+    try {
+      sessionStorage.setItem('aegisx.compileArrival', JSON.stringify({ cinematic: !reduced }));
+    } catch {
+      /* ignore */
+    }
     // reduced-motion: skip dive, simple cut + standard assembly
     if (reduced) {
       navigate('/report', { state: { fromCompile: true, cinematic: false } });

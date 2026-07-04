@@ -40,6 +40,7 @@ function ConsoleTopbar() {
   return (
     <button
       onClick={() => navigate('/')}
+      data-demo="return-vault"
       className="group mb-4 flex items-center gap-2.5 rounded-lg border border-white/5 bg-surface-1/60 px-3 py-1.5 text-xs transition-colors hover:border-cyan-accent/40"
       title="Back to Case Vault"
     >

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Play, Pause, X, MousePointer2, Gauge, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { Play, Pause, X, MousePointer2, Gauge, ChevronRight, ChevronsRight, CheckCircle2 } from 'lucide-react';
 import { WAYPOINTS } from '../data/demoWaypoints';
 import {
   useDemo,
@@ -110,9 +110,14 @@ function Spotlight({ waypoint }) {
   if (!rect) {
     return (
       <div className="no-print pointer-events-none fixed inset-0 z-[60]">
-        <div className="absolute inset-0 bg-navy-950/50" />
-        <div className="absolute left-1/2 top-6 -translate-x-1/2 rounded-lg border border-cyan-accent/30 bg-navy-950/90 px-3 py-1.5 text-xs text-ink-mid shadow-elev-3">
-          Next: <span className="font-semibold text-cyan-accent">{wp.caption}</span> — waiting for it to appear…
+        <div className="absolute inset-0 bg-navy-950/45" />
+        <div className="absolute left-1/2 top-6 -translate-x-1/2 max-w-sm rounded-lg border border-cyan-accent/30 bg-navy-950/90 px-3 py-2 text-center shadow-elev-3">
+          <div className="flex items-center justify-center gap-1.5 text-xs">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-accent" />
+            <span className="text-ink-low">Next:</span>
+            <span className="font-semibold text-cyan-accent">{wp.caption}</span>
+          </div>
+          {wp.note && <div className="mt-0.5 text-[10px] text-ink-low">{wp.note}</div>}
         </div>
       </div>
     );
@@ -165,6 +170,18 @@ function Hud({ demo }) {
           {done ? <CheckCircle2 size={14} /> : <Play size={13} />}
           {done ? 'Demo complete' : `waypoint ${demo.waypoint + 1}/${TOTAL}`}
         </span>
+
+        {/* force-advance (live-stage insurance if anything ever stalls) */}
+        {!done && (
+          <button
+            onClick={() => advanceWaypoint(TOTAL)}
+            title="Skip to next waypoint (►)"
+            className="flex items-center gap-1 rounded-full border border-cyan-accent/30 px-1.5 py-0.5 text-cyan-accent hover:bg-cyan-accent/10"
+            aria-label="Next waypoint"
+          >
+            <ChevronsRight size={14} />
+          </button>
+        )}
         <span className="h-4 w-px bg-white/10" />
 
         {/* speed */}
@@ -243,23 +260,38 @@ export default function DemoMode() {
       } else if (e.key === ']') {
         e.preventDefault();
         setDemoSpeed(Math.min(2, +(demo.speed + 0.1).toFixed(1)));
+      } else if (e.key === 'ArrowRight' && !isTyping()) {
+        e.preventDefault();
+        advanceWaypoint(TOTAL);
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [on, demo.speed]);
 
-  // presenter's real click on the current target advances the pointer
+  // presenter's real click on the current target advances the pointer.
+  // For inputs (advanceOn:'input') we advance when the field is actually typed into,
+  // so the "type the case name" beat isn't skipped by a stray click.
   useEffect(() => {
     if (!on) return undefined;
     const wp = WAYPOINTS[waypoint];
     if (!wp) return undefined;
     const hit = (e) => e.target?.closest && e.target.closest(wp.selector);
+    const advance = () => setTimeout(() => advanceWaypoint(TOTAL), 40);
+
+    if (wp.advanceOn === 'input') {
+      const onInput = (e) => {
+        if (hit(e) && (e.target.value || '').trim().length > 0) advance();
+      };
+      document.addEventListener('input', onInput, true);
+      return () => document.removeEventListener('input', onInput, true);
+    }
+
     const onClick = (e) => {
-      if (hit(e)) setTimeout(() => advanceWaypoint(TOTAL), 40);
+      if (hit(e)) advance();
     };
     const onDrag = (e) => {
-      if (hit(e)) setTimeout(() => advanceWaypoint(TOTAL), 40);
+      if (hit(e)) advance();
     };
     document.addEventListener('click', onClick, true);
     document.addEventListener('dragstart', onDrag, true);

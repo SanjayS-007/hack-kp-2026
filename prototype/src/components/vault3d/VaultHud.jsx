@@ -2,6 +2,7 @@ import { Search, Plus, Play, MessageSquareText, Layers, ShieldCheck, Lock, Arrow
 import { STRATA_POSES } from './poses';
 import { CANON } from '../../data/canon';
 import { VAULT_INTEGRITY, RISK_BREAKDOWN } from '../../data/mockData';
+import { useDemo } from '../../store/demoStore';
 
 const STRATUM_CHIP = {
   lake: `${CANON.filesTotal.toLocaleString()} objects · WORM · 0 mutations since seal`,
@@ -37,6 +38,9 @@ export default function VaultHud({
 }) {
   const focused = view.focus;
   const breakdown = RISK_BREAKDOWN['LEAD-0001'];
+  // The Demo HUD pill also lives at bottom-center; lift the breadcrumbs + stratum chip
+  // clear of it while a demo is running so every stratum (incl. the Crown) stays clickable.
+  const demoOn = useDemo().on;
 
   return (
     <div
@@ -173,8 +177,8 @@ export default function VaultHud({
         </div>
       )}
 
-      {/* bottom-center: stratum breadcrumbs */}
-      <div className="pointer-events-auto absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-white/8 bg-navy-950/80 px-2 py-1.5 backdrop-blur">
+      {/* bottom-center: stratum breadcrumbs (lifted above the Demo HUD while a demo runs) */}
+      <div className={`pointer-events-auto absolute ${demoOn ? 'bottom-20' : 'bottom-4'} left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-white/8 bg-navy-950/80 px-2 py-1.5 backdrop-blur transition-all`}>
         <button
           onClick={onOverview}
           className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${
@@ -188,6 +192,7 @@ export default function VaultHud({
             <button
               key={s.key}
               onClick={() => flyTo(s.pose, focused)}
+              data-demo={s.key === 'crown' ? 'nav-crown' : undefined}
               className={`rounded-full px-2.5 py-1 text-xs font-medium ${
                 currentStratum === s.key ? 'bg-cyan-accent/15 text-cyan-accent' : 'text-ink-mid hover:text-ink-hi'
               }`}
@@ -199,7 +204,7 @@ export default function VaultHud({
 
       {/* contextual stratum HUD chip */}
       {focused && currentStratum && (
-        <div className="pointer-events-none absolute bottom-16 left-1/2 -translate-x-1/2 rounded-md border border-white/8 bg-navy-950/80 px-3 py-1 text-[10px] backdrop-blur">
+        <div className={`pointer-events-none absolute ${demoOn ? 'bottom-36' : 'bottom-16'} left-1/2 -translate-x-1/2 rounded-md border border-white/8 bg-navy-950/80 px-3 py-1 text-[10px] backdrop-blur transition-all`}>
           <span className="mono text-ink-mid">{STRATUM_CHIP[currentStratum]}</span>
         </div>
       )}

@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   FileCheck2,
   Download,
@@ -237,6 +237,7 @@ function StaticGraph() {
 export default function CourtReport() {
   useDocumentTitle('Court Report');
   const location = useLocation();
+  const navigate = useNavigate();
   const compileState = location.state || {};
   const alreadySealed = useReportSealed();
   const [visible, setVisible] = useState(0);
@@ -262,13 +263,24 @@ export default function CourtReport() {
 
   useEffect(() => clearAll, []);
 
-  // arriving from the vault "Compile Case Report" dive → auto-assemble (open E-114)
-  const compileRan = useRef(false);
+  // arriving from the vault "Compile Case Report" dive → auto-assemble (open E-114).
+  // The intent is also mirrored to sessionStorage by the vault so this survives the
+  // WebGL-teardown reload that can drop router state on the 3D→2D handoff.
+  // No ref-guard: under StrictMode the mount effect's timers get cleared by the
+  // clearAll cleanup, so we must let the re-invoked effect reschedule generation.
   useEffect(() => {
-    if (compileRan.current || !compileState.fromCompile) return;
-    compileRan.current = true;
+    let arrival = compileState.fromCompile ? { cinematic: compileState.cinematic } : null;
+    if (!arrival) {
+      try {
+        const v = sessionStorage.getItem('aegisx.compileArrival');
+        if (v) arrival = JSON.parse(v);
+      } catch {
+        /* ignore */
+      }
+    }
+    if (!arrival) return undefined;
     generate(true);
-    if (compileState.cinematic) {
+    if (arrival.cinematic) {
       setLanding(true);
       const t = setTimeout(() => setLanding(false), dur(2600));
       return () => clearTimeout(t);
@@ -295,6 +307,12 @@ export default function CourtReport() {
   const signSeal = () => {
     if (sealed || sealing) return;
     setSealing(true);
+    // Compile intent has served its purpose once we seal — stop auto-regenerating.
+    try {
+      sessionStorage.removeItem('aegisx.compileArrival');
+    } catch {
+      /* ignore */
+    }
     const t = setTimeout(() => {
       setSealing(false);
       setSealed(true);
@@ -317,6 +335,18 @@ export default function CourtReport() {
           <div className="flex items-center gap-2 rounded-full border border-emerald-500/40 bg-navy-950/95 px-4 py-2.5 text-sm font-semibold text-emerald-300 shadow-elev-3">
             <Lock size={15} /> Report sealed · hash anchored to custody chain
           </div>
+        </div>
+      )}
+
+      {/* once sealed, a persistent CTA closes the loop back to the (now green-gem) Vault */}
+      {sealed && (
+        <div className="no-print fixed bottom-6 right-6 z-[80] animate-fade-in">
+          <button
+            onClick={() => navigate('/')}
+            className="cta-pulse flex items-center gap-2 rounded-full border border-emerald-400/50 bg-emerald-500 px-4 py-2.5 text-sm font-bold text-navy-950 shadow-glow-sm transition-all hover:shadow-glow"
+          >
+            <ShieldCheck size={16} /> Return to Vault
+          </button>
         </div>
       )}
 
