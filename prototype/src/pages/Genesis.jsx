@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight, X, ShieldCheck } from 'lucide-react';
 import Stepper from './genesis/Stepper.jsx';
@@ -20,18 +20,29 @@ export default function Genesis() {
   const [stage, setStage] = useState(0);
   const [prev, setPrev] = useState(null);
   const clearTimer = useRef(0);
+  const stageRef = useRef(0);
 
   const advance = useCallback(() => {
-    setStage((s) => {
-      if (s >= LAST_STAGE) return s;
-      setPrev(s);
-      const next = s + 1;
-      window.location.hash = STAGE_HASH[next];
+    setStage((s) => (s >= LAST_STAGE ? s : s + 1));
+  }, []);
+
+  // Stage-change side effects live in an effect (NOT inside the setStage updater),
+  // so we never mutate history/state during React's render phase. Using
+  // replaceState (not a hash push) keeps the back button from just rewinding
+  // through wizard hashes.
+  useEffect(() => {
+    const from = stageRef.current;
+    if (from === stage) return;
+    stageRef.current = stage;
+    window.history.replaceState(null, '', STAGE_HASH[stage]);
+    if (stage > from) {
+      setPrev(from);
       clearTimeout(clearTimer.current);
       clearTimer.current = setTimeout(() => setPrev(null), 440);
-      return next;
-    });
-  }, []);
+    }
+  }, [stage]);
+
+  useEffect(() => () => clearTimeout(clearTimer.current), []);
 
   const finalizeSeal = useCallback(
     (name) => {

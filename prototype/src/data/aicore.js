@@ -155,7 +155,7 @@ export const ENGINES = [
     ],
     artifact: 'embed',
     chips: [
-      { k: 'vectors', v: '480,231' },
+      { k: 'vectors', v: CANON.filesTotal.toLocaleString() },
       { k: 'dim', v: '384' },
     ],
   },

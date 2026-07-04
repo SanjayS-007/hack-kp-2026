@@ -15,7 +15,8 @@ import RiskQueue from './pages/RiskQueue.jsx';
 import CourtReport from './pages/CourtReport.jsx';
 import DemoMode from './components/DemoMode.jsx';
 import { clearCaseStore } from './store/caseStore.js';
-import { clearDemo } from './store/demoStore.js';
+import { clearDemo, getDemo } from './store/demoStore.js';
+import { setSpeedMult } from './lib/speed.js';
 import { hasWebGL } from './lib/webgl.js';
 
 // Code-split the entire 3D world so console routes stay fast.
@@ -40,6 +41,11 @@ export default function App() {
     return params.has('flat') || !hasWebGL();
   }, []);
 
+  // Re-apply persisted demo speed on boot (the CSS var resets to 1 on reload).
+  useEffect(() => {
+    setSpeedMult(getDemo().speed);
+  }, []);
+
   // ?reset — hard-clear all session state between demo takes (Presenter Safety Rail)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -52,7 +58,10 @@ export default function App() {
       } catch {
         /* storage unavailable — ignore */
       }
-      window.location.replace(window.location.pathname);
+      // Preserve any other params (e.g. ?flat) — only strip ?reset.
+      params.delete('reset');
+      const qs = params.toString();
+      window.location.replace(window.location.pathname + (qs ? `?${qs}` : ''));
     }
   }, []);
 

@@ -13,6 +13,7 @@ import {
   Loader2,
 } from 'lucide-react';
 import { LOCAL_FILES, NET_PRESETS, CLOUD_PROVIDERS, CLOUD_BUCKET } from '../../data/mockData';
+import { dur } from '../../lib/speed';
 
 const MODALITIES = [
   { id: 'local', title: 'Local / Forensic Image', desc: 'Write-blocked disk images & extractions', Icon: HardDrives, accent: '#22d3ee' },
@@ -125,16 +126,20 @@ function LocalPanel({ sel, setSel, sealed, setSealed }) {
 function NetworkPanel({ sources, setSources }) {
   const [url, setUrl] = useState('');
   const [phase, setPhase] = useState('idle'); // idle | handshake | done
+  const timers = useRef([]);
+  useEffect(() => () => timers.current.forEach(clearTimeout), []);
   const valid = /^https?:\/\/|^s3:\/\//i.test(url);
   const submit = () => {
     if (phase === 'handshake') return;
     setPhase('handshake');
-    setTimeout(() => {
-      setPhase('done');
-      setSources((s) => [...s, url || 'Warrant return (S3 presigned)']);
-      setUrl('');
-      setTimeout(() => setPhase('idle'), 400);
-    }, 1200);
+    timers.current.push(
+      setTimeout(() => {
+        setPhase('done');
+        setSources((s) => [...s, url || 'Warrant return (S3 presigned)']);
+        setUrl('');
+        timers.current.push(setTimeout(() => setPhase('idle'), dur(400)));
+      }, dur(1200)),
+    );
   };
   return (
     <div className="animate-fade-in">
@@ -276,14 +281,16 @@ function LivePanel({ on, setOn, segs, setSegs }) {
 function CloudPanel({ connected, setConnected, sel, setSel }) {
   const [modal, setModal] = useState(null); // provider being connected
   const [busy, setBusy] = useState(false);
+  const connectTimer = useRef(0);
+  useEffect(() => () => clearTimeout(connectTimer.current), []);
   const connect = (p) => {
     setModal(p);
     setBusy(true);
-    setTimeout(() => {
+    connectTimer.current = setTimeout(() => {
       setBusy(false);
       setConnected(p.id);
       setModal(null);
-    }, 900);
+    }, dur(900));
   };
   const allSel = sel.length === CLOUD_BUCKET.length;
   return (

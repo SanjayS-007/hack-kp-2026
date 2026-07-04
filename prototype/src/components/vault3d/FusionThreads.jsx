@@ -62,7 +62,7 @@ function Thread({ thread, reduced, joined, onSelect }) {
       {joined && (
         <Line points={pts} color="#e2e8f0" lineWidth={1.2} transparent opacity={0.7} />
       )}
-      <Html position={mid} center distanceFactor={22} occlude={false}>
+      <Html position={mid} center distanceFactor={22} occlude={false} zIndexRange={[10, 0]}>
         <button
           onClick={() => onSelect && onSelect(thread)}
           className="pointer-events-auto whitespace-nowrap rounded-full border bg-navy-950/85 px-2 py-0.5 text-[10px] font-semibold shadow-elev-3"

@@ -136,7 +136,7 @@ export default function Graph3D({ data, expanded, reduced, onExpand, onOpenExplo
 
       {/* escape hatch → full 2D explorer */}
       {expanded && (
-        <Html position={[4.4, 3.2, 0]} distanceFactor={16}>
+        <Html position={[4.4, 3.2, 0]} distanceFactor={16} zIndexRange={[10, 0]}>
           <button
             onClick={() => onOpenExplorer && onOpenExplorer()}
             className="pointer-events-auto whitespace-nowrap rounded-md border border-cyan-accent/40 bg-navy-950/95 px-2 py-1 text-[10px] font-semibold text-cyan-accent shadow-elev-3 hover:bg-cyan-accent/10"

@@ -30,6 +30,11 @@ export default function VaultWorld({
 }) {
   const controlsRef = useRef();
 
+  // Island billboards only make sense at the vault overview + case-focus poses.
+  // At any stratum pose (lake/constellation/graph/crown) or during the compile dive
+  // they overlap the camera view, so fade them out.
+  const labelsVisible = view.pose === 'P0' || view.pose === 'P1';
+
   const reframe = () => {
     const c = controlsRef.current;
     if (!c) return;
@@ -43,6 +48,12 @@ export default function VaultWorld({
       camera={{ position: [0, 30, 46], fov: 50, near: 0.1, far: 400 }}
       gl={{ antialias: true, powerPreference: 'high-performance' }}
       raycaster={{ params: { Points: { threshold: 0.35 } } }}
+      onCreated={({ gl }) => {
+        gl.domElement.addEventListener('webglcontextlost', (e) => {
+          e.preventDefault();
+          window.location.reload();
+        });
+      }}
       onDoubleClick={reframe}
       frameloop="always"
     >
@@ -60,6 +71,7 @@ export default function VaultWorld({
           reduced={reduced}
           fresh={createdId === c.id}
           reportStatus={reportStatus}
+          showLabel={labelsVisible}
           onSelect={onSelect}
           onExpandGraph={onExpandGraph}
           onOpenExplorer={onOpenExplorer}

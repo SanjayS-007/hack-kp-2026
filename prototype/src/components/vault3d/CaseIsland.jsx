@@ -25,6 +25,7 @@ export default function CaseIsland({
   reduced,
   fresh,
   reportStatus,
+  showLabel = true,
   onSelect,
   onExpandGraph,
   onOpenExplorer,
@@ -101,22 +102,27 @@ export default function CaseIsland({
 
       <Crown score={97} reportStatus={reportStatus} reduced={reduced} onOpenProofs={() => onOpenProofs && onOpenProofs(caseInfo.id)} />
 
-      {/* billboard label */}
-      <Html position={[0, STRATA_Y.crown + 2.6, 0]} center distanceFactor={20} occlude={false}>
-        <button
-          onClick={() => onSelect && onSelect(caseInfo.id)}
-          className={`pointer-events-auto flex flex-col items-center whitespace-nowrap rounded-lg border bg-navy-950/85 px-3 py-1.5 shadow-elev-3 transition-all ${
-            focused ? 'border-cyan-accent/60' : 'border-white/10 hover:border-cyan-accent/40'
-          }`}
+      {/* billboard label — only shown at vault-overview (P0) + case-focus (P1) */}
+      <Html position={[0, STRATA_Y.crown + 2.6, 0]} center distanceFactor={20} occlude={false} zIndexRange={[10, 0]}>
+        <div
+          className="transition-opacity duration-300"
+          style={{ opacity: showLabel ? 1 : 0, pointerEvents: showLabel ? 'auto' : 'none' }}
         >
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full" style={{ background: caseInfo.tier, boxShadow: `0 0 8px ${caseInfo.tier}` }} />
-            <span className="mono text-xs font-bold text-cyan-accent">{caseInfo.id}</span>
-            <span className="badge" style={{ background: `${statusColor}1a`, color: statusColor }}>{caseInfo.status}</span>
-          </div>
-          <div className="text-sm font-bold text-white">{caseInfo.name}</div>
-          {fresh && <div className="text-[9px] font-semibold uppercase tracking-label text-cyan-accent">Sealed just now</div>}
-        </button>
+          <button
+            onClick={() => onSelect && onSelect(caseInfo.id)}
+            className={`pointer-events-auto flex flex-col items-center whitespace-nowrap rounded-lg border bg-navy-950/85 px-3 py-1.5 shadow-elev-3 transition-all ${
+              focused ? 'border-cyan-accent/60' : 'border-white/10 hover:border-cyan-accent/40'
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full" style={{ background: caseInfo.tier, boxShadow: `0 0 8px ${caseInfo.tier}` }} />
+              <span className="mono text-xs font-bold text-cyan-accent">{caseInfo.id}</span>
+              <span className="badge" style={{ background: `${statusColor}1a`, color: statusColor }}>{caseInfo.status}</span>
+            </div>
+            <div className="text-sm font-bold text-white">{caseInfo.name}</div>
+            {fresh && <div className="text-[9px] font-semibold uppercase tracking-label text-cyan-accent">Sealed just now</div>}
+          </button>
+        </div>
       </Html>
     </group>
   );

@@ -46,6 +46,8 @@ export default function Vault3D() {
   const [diving, setDiving] = useState(null); // null | 'climb' | 'dive' | 'stream'
   const askTimer = useRef(0);
   const diveTimers = useRef([]);
+  const proofTimer = useRef(0);
+  const bootTimer = useRef(0);
   const bootstrapped = useRef(false);
 
   const cases = useMemo(() => VAULT_CASES.map((c) => ({ id: c.id, name: c.name, status: c.status, tier: c.tier })), []);
@@ -82,7 +84,7 @@ export default function Vault3D() {
   useEffect(() => {
     if (bootstrapped.current || !data) return;
     bootstrapped.current = true;
-    if (createdId) setTimeout(() => setView((v) => ({ ...v, pose: 'P1', focus: createdId })), dur(400));
+    if (createdId) bootTimer.current = setTimeout(() => setView((v) => ({ ...v, pose: 'P1', focus: createdId })), dur(400));
   }, [data, createdId]);
 
   const datasets = useMemo(() => {
@@ -104,8 +106,14 @@ export default function Vault3D() {
 
   // ── camera ───────────────────────────────────────────────
   const flyTo = (pose, caseId) => {
+    clearTimeout(proofTimer.current);
     setProofsOpen(false);
     setView((v) => ({ ...v, pose, focus: pose === 'P0' ? null : caseId ?? v.focus, expandedGraph: pose === 'P4' ? v.expandedGraph : false }));
+    // Crown breadcrumb → auto-open the Risk Proof panel once the flight settles
+    // (dial-click remains an additional opener). Unblocks Compile Case Report.
+    if (pose === 'P5') {
+      proofTimer.current = setTimeout(() => setProofsOpen(true), reduced ? 0 : dur(900));
+    }
   };
   const onOverview = () => {
     setAskOpen(false);
@@ -245,7 +253,15 @@ export default function Vault3D() {
     }, 700 + 2400 + 500);
   };
 
-  useEffect(() => () => diveTimers.current.forEach(clearTimeout), []);
+  useEffect(
+    () => () => {
+      diveTimers.current.forEach(clearTimeout);
+      clearTimeout(askTimer.current);
+      clearTimeout(proofTimer.current);
+      clearTimeout(bootTimer.current);
+    },
+    [],
+  );
 
   // proof-chip → open a representative artifact in the Inspector
   const onProofChip = (kind) => {

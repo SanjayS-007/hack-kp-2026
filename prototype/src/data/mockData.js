@@ -83,7 +83,7 @@ export const ACTIVITY_FEED = [
   { ago: 203, msg: 'SHA-256 chain-of-custody sealed for evidence batch #7', tag: 'CUSTODY' },
   { ago: 246, msg: 'Apparent-age KDE estimate completed on cluster CL-092', tag: 'PERCEPTION' },
   { ago: 291, msg: 'Entity graph updated: +3 edges (shared-hash correlation)', tag: 'GRAPH' },
-  { ago: 332, msg: 'RAG index refreshed — 480,231 artifacts embedded', tag: 'ASK' },
+  { ago: 332, msg: `RAG index refreshed — ${CANON.filesTotal.toLocaleString()} artifacts embedded`, tag: 'ASK' },
 ];
 
 // Rotating pool of new events that stream into the ticker every 4-7s.
@@ -618,7 +618,7 @@ export const FILE_TYPE_DONUT = [
 export const ARCH_LAYERS = [
   { id: 'src', label: 'Sources', metric: '2.4 TB in' },
   { id: 'ingest', label: 'Ingest / VICS', metric: '480k normalized' },
-  { id: 'ai', label: 'AI Core', metric: '312 flagged' },
+  { id: 'ai', label: 'AI Core', metric: `${CANON.flagged} flagged` },
   { id: 'fusion', label: 'Fusion Graph', metric: '38 entities' },
   { id: 'console', label: 'Console', metric: 'court-ready' },
 ];
@@ -626,8 +626,8 @@ export const ARCH_LAYERS = [
 export const SEAL_META = [
   ['Devices', '3'],
   ['Volume', '2.4 TB'],
-  ['Files', '480,231'],
-  ['Flagged', '312'],
+  ['Files', CANON.filesTotal.toLocaleString()],
+  ['Flagged', String(CANON.flagged)],
   ['Jurisdiction', 'Regional Cyber Division'],
   ['Investigator', '#A-2291'],
   ['Seal', 'SHA-256 + ML-DSA'],

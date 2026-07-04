@@ -145,14 +145,14 @@ function LaneParticles({ color, count = 4 }) {
         <span
           key={i}
           className="ai-particle"
-          style={{ background: color, boxShadow: `0 0 6px ${color}`, animationDelay: `${(i * 650) / 1}ms` }}
+          style={{ background: color, boxShadow: `0 0 6px ${color}`, animationDelay: `${dur(i * 650)}ms` }}
         />
       ))}
     </>
   );
 }
 
-export default function Observatory({ compact = false, onComplete }) {
+export default function Observatory({ compact = false, exiting = false, onComplete }) {
   const engById = useMemo(() => Object.fromEntries(ENGINES.map((e) => [e.id, e])), []);
   const byLane = useMemo(
     () => Object.fromEntries(LANES.map((l) => [l.id, ENGINES.filter((e) => e.lane === l.id)])),
@@ -164,8 +164,9 @@ export default function Observatory({ compact = false, onComplete }) {
   const [drawer, setDrawer] = useState(null);
 
   // Compact (genesis pass): lanes light A→B→C→D, then verifier flash → onComplete.
-  const [laneProgress, setLaneProgress] = useState(compact ? -1 : 3);
-  const [verifierFlash, setVerifierFlash] = useState(false);
+  // When `exiting`, this instance is a frozen slide-out snapshot — start fully lit.
+  const [laneProgress, setLaneProgress] = useState(compact ? (exiting ? 3 : -1) : 3);
+  const [verifierFlash, setVerifierFlash] = useState(Boolean(exiting));
 
   // Trace-a-Specimen
   const [traceIdx, setTraceIdx] = useState(-1); // -1 idle, 0..n current, n = exhibit
@@ -189,7 +190,7 @@ export default function Observatory({ compact = false, onComplete }) {
 
   // compact sequence
   useEffect(() => {
-    if (!compact) return;
+    if (!compact || exiting) return; // frozen exit snapshot — don't restart choreography
     const push = (fn, ms) => timers.current.push(setTimeout(fn, dur(ms)));
     push(() => setLaneProgress(0), 300);
     push(() => setLaneProgress(1), 1900);
@@ -202,7 +203,16 @@ export default function Observatory({ compact = false, onComplete }) {
       timers.current = [];
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [compact]);
+  }, [compact, exiting]);
+
+  // Clear any trace / choreography timers on unmount (covers full mode too).
+  useEffect(
+    () => () => {
+      timers.current.forEach(clearTimeout);
+      timers.current = [];
+    },
+    [],
+  );
 
   const startTrace = () => {
     timers.current.forEach(clearTimeout);

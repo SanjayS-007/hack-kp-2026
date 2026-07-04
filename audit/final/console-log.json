@@ -1,0 +1,27 @@
+[
+  {
+    "route": "vault-overview",
+    "type": "warning",
+    "text": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead."
+  },
+  {
+    "route": "vault-overview",
+    "type": "warning",
+    "text": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead."
+  },
+  {
+    "route": "/genesis#genesis-2-process",
+    "type": "error",
+    "text": "Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://react.dev/link/setstate-in-render BrowserRouter Genesis Genesis"
+  },
+  {
+    "route": "/genesis#genesis-3-aicore",
+    "type": "warning",
+    "text": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead."
+  },
+  {
+    "route": "/ask",
+    "type": "script-exception",
+    "text": "page.screenshot: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n"
+  }
+]

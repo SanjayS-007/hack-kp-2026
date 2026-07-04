@@ -115,7 +115,9 @@ function useForce(nodes, links) {
       force((f2) => f2 + 1);
       if (ctrl.current.frame < 260) ctrl.current.raf = requestAnimationFrame(tick);
       else {
-        ctrl.current.raf = setTimeout(() => requestAnimationFrame(tick), 900);
+        ctrl.current.raf = setTimeout(() => {
+          ctrl.current.raf = requestAnimationFrame(tick);
+        }, 900);
         ctrl.current.frame = 200;
       }
     };

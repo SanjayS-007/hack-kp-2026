@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Vault, LockKey } from '@phosphor-icons/react';
 import { CheckCircle2 } from 'lucide-react';
 import { SEAL_META } from '../../data/mockData';
+import { dur } from '../../lib/speed';
 
 const pad = (n) => n.toString().padStart(2, '0');
 
@@ -14,6 +15,7 @@ export default function Seal({ onSeal }) {
     return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())} UTC`;
   });
   const inputRef = useRef(null);
+  const sealTimer = useRef(0);
   const reduce = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // slot-machine mint settling to 0417
@@ -26,7 +28,7 @@ export default function Seal({ onSeal }) {
     let raf;
     const spin = (now) => {
       const e = now - start;
-      if (e < 1400) {
+      if (e < dur(1400)) {
         setMint(pad(Math.floor(Math.random() * 9999)).slice(-4));
         raf = requestAnimationFrame(spin);
       } else {
@@ -38,14 +40,16 @@ export default function Seal({ onSeal }) {
   }, [reduce]);
 
   useEffect(() => {
-    const t = setTimeout(() => inputRef.current?.focus(), 500);
+    const t = setTimeout(() => inputRef.current?.focus(), dur(500));
     return () => clearTimeout(t);
   }, []);
 
+  useEffect(() => () => clearTimeout(sealTimer.current), []);
+
   const seal = () => {
-    if (sealing) return;
+    if (sealing || mint !== '0417') return; // don't seal while the mint is still spinning
     setSealing(true);
-    setTimeout(() => onSeal(name), reduce ? 200 : 1400);
+    sealTimer.current = setTimeout(() => onSeal(name), dur(reduce ? 200 : 1400));
   };
 
   const meta = [...SEAL_META, ['Opened', openedUtc]];

@@ -67,7 +67,7 @@ export default function Lake({ blocks = [], tier = '#22d3ee', reduced, onPickBat
 
       {/* hover chip */}
       {hover >= 0 && layout[hover] && (
-        <Html position={[layout[hover].px, layout[hover].h + 0.7, layout[hover].pz]} center distanceFactor={16}>
+        <Html position={[layout[hover].px, layout[hover].h + 0.7, layout[hover].pz]} center distanceFactor={16} zIndexRange={[10, 0]}>
           <div className="pointer-events-none whitespace-nowrap rounded-md border border-cyan-accent/40 bg-navy-950/95 px-2 py-1 text-[10px] text-ink-hi shadow-elev-3">
             <span className="mono font-semibold text-cyan-accent">{layout[hover].batch}</span>
             <span className="text-ink-mid"> · {layout[hover].objects.toLocaleString()} objects · sha256 ✓ · ML-DSA ✓</span>

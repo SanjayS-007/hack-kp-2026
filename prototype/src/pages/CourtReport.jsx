@@ -300,7 +300,7 @@ export default function CourtReport() {
       setSealed(true);
       setReportSealed(true); // flips the 3D vault crown gem green (persisted)
       setToast(true);
-      setTimeout(() => setToast(false), dur(4200));
+      timers.current.push(setTimeout(() => setToast(false), dur(4200)));
     }, dur(1600));
     timers.current.push(t);
   };
@@ -701,7 +701,7 @@ export default function CourtReport() {
               <div className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-emerald-300 bg-emerald-50 p-3">
                 <span className="text-xs font-semibold text-emerald-800">HERAM / ECS Validation Stamp — findings above threshold</span>
                 <span className="flex gap-2">
-                  <span className="rounded bg-emerald-600 px-2 py-0.5 text-[11px] font-semibold text-white">ECS 0.93 · PASS</span>
+                  <span className="rounded bg-emerald-600 px-2 py-0.5 text-[11px] font-semibold text-white">ECS ≥ {CANON.ecsGate} · PASS</span>
                   <span className="rounded bg-slate-800 px-2 py-0.5 text-[11px] font-semibold text-white">§63 READY</span>
                 </span>
               </div>
@@ -806,7 +806,7 @@ export default function CourtReport() {
             <span className="font-semibold text-emerald-300">HERAM validation: {CANON.reportGrounded}/{CANON.reportTotal} statements grounded.</span>
             <span className="ml-1 text-ink-mid">1 statement fell below the ECS threshold and was excluded (Appendix C).</span>
           </div>
-          <Badge color="#34d399">97.6% grounded</Badge>
+          <Badge color="#34d399">{((CANON.reportGrounded / CANON.reportTotal) * 100).toFixed(1)}% grounded</Badge>
         </div>
       )}
     </>

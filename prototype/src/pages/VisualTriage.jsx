@@ -18,6 +18,7 @@ import {
   ShieldAlert,
 } from 'lucide-react';
 import { MEDIA, CAT_META, DEVICES } from '../data/mockData';
+import { CANON } from '../data/canon';
 import { CatBadge, PageHeader, Badge, useDocumentTitle } from '../components/ui';
 import ArtifactInspector, { useInspectorNav } from '../components/inspector/ArtifactInspector';
 import { strataTrail } from '../data/inspector';
@@ -85,7 +86,7 @@ function WellbeingBanner() {
       <div className="flex-1">
         <div className="text-sm font-semibold text-emerald-300">Investigator Wellbeing Active</div>
         <div className="text-xs text-ink-mid">
-          AI triage reduced human review volume by <span className="font-bold text-emerald-400">91%</span>. All media
+          AI triage reduced human review volume by <span className="font-bold text-emerald-400">{CANON.reviewReduction}%</span>. All media
           blurred-by-default · desaturated · XAI-explained · exposure-minimized.
         </div>
       </div>
@@ -304,7 +305,7 @@ export default function VisualTriage() {
         accent="#f59e0b"
         actions={
           <span className="flex items-center gap-2 text-sm text-ink-mid">
-            <ShieldAlert size={16} className="text-risk-b" /> 312 flagged ·{' '}
+            <ShieldAlert size={16} className="text-risk-b" /> {CANON.flagged} flagged ·{' '}
             <span className="mono text-white">{shown.length}</span> shown
           </span>
         }

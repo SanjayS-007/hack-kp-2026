@@ -10,16 +10,19 @@ const PH_ICONS = { Scan, Fingerprint, Cube, FileMagnifyingGlass, Cpu };
 const TOTAL_BASE = 8000;
 const TARGET = CANON.filesTotal;
 
-export default function Process({ onNext }) {
-  const [elapsed, setElapsed] = useState(0);
-  const [total, setTotal] = useState(TOTAL_BASE);
+export default function Process({ onNext, exiting = false }) {
+  const initialTotal = dur(TOTAL_BASE);
+  const [elapsed, setElapsed] = useState(exiting ? initialTotal : 0);
+  const [total, setTotal] = useState(initialTotal);
   const [logIdx, setLogIdx] = useState(0);
   const [spark, setSpark] = useState([4, 6, 5, 8]);
   const [flash, setFlash] = useState(false);
   const advanced = useRef(false);
+  const nextTimer = useRef(0);
   const reduce = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   useEffect(() => {
+    if (exiting) return undefined; // frozen exit snapshot — don't restart choreography
     const T = dur(TOTAL_BASE); // speed-aware run length
     setTotal(T);
     const start = performance.now();
@@ -31,7 +34,7 @@ export default function Process({ onNext }) {
       else if (!advanced.current) {
         advanced.current = true;
         setFlash(true);
-        setTimeout(onNext, dur(600));
+        nextTimer.current = setTimeout(onNext, dur(600));
       }
     };
     raf = requestAnimationFrame(tick);
@@ -41,8 +44,9 @@ export default function Process({ onNext }) {
       cancelAnimationFrame(raf);
       clearInterval(logT);
       clearInterval(sparkT);
+      clearTimeout(nextTimer.current);
     };
-  }, [onNext]);
+  }, [onNext, exiting]);
 
   const progress = elapsed / total;
   const eased = 1 - Math.pow(1 - progress, 2);

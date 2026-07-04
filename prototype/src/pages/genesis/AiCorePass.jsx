@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import Observatory from '../../components/aicore/Observatory';
 
-export default function AiCorePass({ onNext }) {
+export default function AiCorePass({ onNext, exiting = false }) {
   const advanced = useRef(false);
   const done = () => {
     if (advanced.current) return;
@@ -18,7 +18,7 @@ export default function AiCorePass({ onNext }) {
         </p>
       </div>
       <div className="card p-4">
-        <Observatory compact onComplete={done} />
+        <Observatory compact exiting={exiting} onComplete={done} />
       </div>
     </div>
   );

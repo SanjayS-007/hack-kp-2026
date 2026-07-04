@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { ShieldAlert, Layers, ScanFace, Combine, Aperture, AudioLines, CheckCircle2, RefreshCw, Loader2, FileWarning, Fingerprint } from 'lucide-react';
 import { SYNTHETIC_FILES, PROVENANCE, MODEL_FINGERPRINT } from '../data/mockData';
 import { PageHeader, useDocumentTitle } from '../components/ui';
+import { dur } from '../lib/speed';
 
 const STREAM_ICONS = { 'Global Texture': Layers, 'Facial Geometry': ScanFace, 'Semantic Fusion': Combine };
 const STAGES = ['Global Texture', 'Facial Geometry', 'Semantic Fusion', 'A/V Sync'];
@@ -127,9 +128,9 @@ export default function SyntheticDetection() {
 
   const countUp = useCallback((target) => {
     const start = performance.now();
-    const dur = 800;
+    const span = dur(800);
     const step = (now) => {
-      const p = Math.min(1, (now - start) / dur);
+      const p = Math.min(1, (now - start) / span);
       setVerdict(+(target * (1 - Math.pow(1 - p, 3))).toFixed(1));
       if (p < 1) raf.current = requestAnimationFrame(step);
     };
@@ -138,9 +139,10 @@ export default function SyntheticDetection() {
 
   const run = useCallback(() => {
     clearAll();
+    setStage(0);
     setScores([0, 0, 0]);
     setVerdict(0);
-    const push = (fn, ms) => timers.current.push(setTimeout(fn, ms));
+    const push = (fn, ms) => timers.current.push(setTimeout(fn, dur(ms)));
     push(() => setStage(1), 250);
     push(() => setScores((s) => [file.streams[0].score, s[1], s[2]]), 350);
     push(() => setStage(2), 950);
