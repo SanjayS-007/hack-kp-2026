@@ -1,185 +1,212 @@
-# AEGIS-X — LIVE STAGE Presenter Script · v2 "From the Heart"
-### "Operation Sentinel" · driven live in **Demo Mode** · ~3½–4 min · 22-waypoint walk
-
-> **How to run:** `?reset` → press **`D`** → follow the spotlight; each real click advances it. Genesis auto-runs ~15s (hands off). If a beat hesitates: tap **►** / `→` and use the recovery line.
-> **The spine of this talk:** one story — *a chain*. It begins at a front door, it holds through every click, and it closes in a courtroom. Say the word "chain" exactly where marked; it's the refrain the room will remember.
-> **Delivery rules:** speak to the room, not the screen. Short sentences. Drop your pace 20% at both **[SILENCE]** beats — silence is the loudest thing in this demo. Never describe content; the victim is a labelled node; the emotion lives in the investigator's burden and the child reached sooner. All data fictional — say so once, own it.
-> **Two layers per beat:** **Say** = the heart-line (always). **Depth** = one precise line if judges lean in (optional — skip freely to hold time).
+# AEGIS-X — LIVE STAGE Presenter Script · v3 "Heart + Firepower"
+### "Operation Sentinel" · Demo Mode · ~4 min · 22 waypoints
+> Every beat = **CLICK** → **SAY** (tech named out loud, punchy) → **🧠 CARD** (keyword chips: what we use → what it gives). Memorize the CARDS — they're your flashcards; if you remember nothing else, say the card.
+> Run: `?reset` → `D` → follow the spotlight. Stall? tap **►**, use recovery line. Two **[SILENCE]** beats — hands off, look at the room.
+> Refrain: **"the chain begins → holds → closes."** All data fictional; victim = a labelled node, never more.
 
 ---
 
-## 🎤 THE OPEN (~25 seconds — before you touch anything)
-
-*(Stand still. No screen yet. Look at the room.)*
-
-> "I want you to picture a room. One desk. One investigator. And half a million files from three seized devices, waiting to be looked at.
-> The average wait is **nine months**. And while the evidence waits… a child waits.
+## 🎤 OPEN (~25s, before touching anything)
+> "Picture a room. One desk. One investigator. **Half a million files** from three seized devices.
+> The wait to look at them all: **nine months**. And while evidence waits — a child waits.
 > *(beat)*
-> We built AEGIS-X because that wait is optional. **Forty-seven minutes** to triage all of it — with proof a court can hold in its hands.
-> Everything you're about to see is one unbroken **chain**. Watch it begin. Watch it hold. Watch it close."
+> AEGIS-X does that triage in **forty-seven minutes** — and every finding comes with **cryptographic proof a court can hold**.
+> One unbroken **chain**: watch it begin, hold, and close."
 
-*(Press `D`. Spotlight lands on ⊕ New Case.)*
-
----
-
-## CHAPTER 1 — THE CHAIN BEGINS *(Genesis · WP0–6)*
-
-**Beat 1 · WP0 — click ⊕ New Case**
-- **Say:** "This is the Fusion Vault. Every case is an island — sealed, sovereign, untouchable. Let's start one the way it starts in real life: with a knock on a door, and three seized devices."
-
-**Beat 2 · WP1 — drag the seizure bundle**
-- **Say:** "The moment evidence touches this system — before any human, before any AI — every file is given a cryptographic fingerprint. Change one pixel, and the fingerprint screams. **The chain of custody begins at the very first touch.**"
-- **Depth:** "SHA-256 plus a post-quantum signature — because this evidence may need to hold up in a courtroom ten years from now."
-
-**Beat 3 · WP2 — click Begin Ingestion** *(auto-runs ~15s — this is your longest talking window; own it)*
-- **Say:** "Now watch nine months happen in fifteen seconds.
-  Four AI lanes read everything at once — one sees images, one reads language, one rebuilds time, one connects people.
-  And here is the line I care about most: **the machines look at the worst of it, so a human being doesn't have to.**
-  At the end of the lane sits a verifier — an AI whose only job is to *doubt* the other AIs. Nothing passes unchecked."
-- *(As the counter settles):* "Four hundred and eighty thousand files. Sealed. Sorted. **The chain holds.**"
-
-**Beat 4 · WP3 — click Create Case Vault**
-- **Say:** "Integrity check: four-eighty-thousand in, four-eighty-thousand accounted for. Nothing lost. Nothing altered."
-
-**Beat 5 · WP4 — type the case name** *(the only typing in the demo — let them see it)*
-- **Say:** "And the system asks a human for exactly one thing. A name." *(type slowly)* "**Operation Sentinel.**"
-
-**Beat 6 · WP5 — click Seal into Vault**
-- **Say:** "Sealed. That padlock isn't a picture — it's a promise the math keeps."
-
-**Beat 7 · WP6 — click the sealed case**
-- **Say:** "The island rises. Let's step inside and go to work."
+*(Press `D`.)*
 
 ---
 
-## CHAPTER 2 — ASK THE EVIDENCE *(WP7–8)*
+## CH 1 — THE CHAIN BEGINS *(Genesis · WP0–6)*
 
-**Beat 8 · WP7 — click Ask AEGIS**
-- **Say:** "Here's what actually changes an investigator's day. You don't dig through folders at two in the morning. **You ask.**"
+**B1 · WP0 — ⊕ New Case**
+- **Say:** "The Fusion Vault. Every case is a sealed island — **air-gapped, sovereign**, nothing ever leaves this building. Let's open one the way it starts in real life: a knock on a door, three seized devices."
+- 🧠 **CARD:** `AIR-GAPPED VAULT + WORM STORAGE → evidence that can't leak, can't be altered`
 
-**Beat 9 · WP8 — click the Subject-B chip** *(trace runs ~5.6s — narrate over it)*
-- **Say:** "What do we know about Subject-B? — and watch it *think out loud*. It plans. It searches the graph. It pulls the files. Then it verifies itself.
-  And every sentence in that answer lands with its own citation. This system never says *trust me*. It says — **here's where I got that.**"
-- **Depth:** "Retrieval-augmented generation over a local model — air-gapped, hallucination-scored, every reasoning step logged so a court can replay it."
+**B2 · WP1 — drag the seizure bundle**
+- **Say:** "First touch — and every file is instantly stamped with a **SHA-256 fingerprint plus a post-quantum signature**. Change one pixel, the fingerprint screams. **The chain of custody begins before any human, before any AI.**"
+- 🧠 **CARD:** `SHA-256 + ML-DSA (post-quantum) → tamper-proof custody from second zero — valid even in a 2035 courtroom`
 
-> *Transition:* "That's what we know. But cases aren't lost on what we know. They're lost on what we can't see."
+**B3 · WP2 — Begin Ingestion** *(auto-runs ~15s — your longest window, own it)*
+- **Say:** "Nine months, compressed into fifteen seconds. **Four AI lanes in parallel** —
+  a **hybrid vision transformer** reads every image, **NLP with coded-slang lexicons** reads every chat, **digital stratigraphy** rebuilds every timeline, and a **graph engine** connects every person.
+  **Known-hash matching — PhotoDNA-class — clears seventy-eight percent instantly**: the machines see the worst of it, **so a human never has to**.
+  And at the exit: a **Verifier Agent** — an AI whose only job is to doubt the other AIs."
+- *(counter settles)* "480,000 files. Sealed. Sorted. **The chain holds.**"
+- 🧠 **CARD:** `4 PARALLEL AI LANES (ConvNeXt+Swin vision · NLP lexicons · stratigraphy · graph) + PhotoDNA prefilter + VERIFIER AGENT → 9 months → 47 min, 91% less trauma exposure`
+
+**B4 · WP3 — Create Case Vault**
+- **Say:** "Integrity check: **480,231 in — 480,231 accounted for.** Nothing lost, nothing altered, mathematically provable."
+- 🧠 **CARD:** `HASH MANIFEST RECONCILIATION → zero-loss guarantee, on the record`
+
+**B5 · WP4 — type "Operation Sentinel"** *(only typing in the demo)*
+- **Say:** "The system asks a human for exactly one thing — a name." *(type slow)* "**Operation Sentinel.**"
+- 🧠 **CARD:** `ONE HUMAN INPUT → automation everywhere except judgment`
+
+**B6 · WP5 — Seal into Vault**
+- **Say:** "Sealed. That padlock isn't a picture — **it's a promise the math keeps**."
+- 🧠 **CARD:** `CRYPTOGRAPHIC SEAL → the case itself becomes evidence`
+
+**B7 · WP6 — open the sealed case**
+- **Say:** "The island rises. Step inside — let's go to work."
+
+> *Bridge:* "Ingestion done. Now the part that changes an investigator's life."
 
 ---
 
-## CHAPTER 3 — THE ONE NOBODY SAW *(WP9–10)* · 🏆 MONEY SHOT
+## CH 2 — ASK THE EVIDENCE *(WP7–8)*
 
-**Beat 10 · WP9 — click Entity Graph**
-- **Say:** "The confirmed network — people, phones, wallets. Every line here is evidence-backed. And somewhere beyond it… someone thinks they're invisible."
+**B8 · WP7 — Ask AEGIS**
+- **Say:** "No more digging through folders at 2 a.m. — you **ask**. This is **RAG — retrieval-augmented generation — on a local Llama model**. The AI can only speak from sealed evidence. **It physically cannot make things up unchecked.**"
+- 🧠 **CARD:** `RAG + LOCAL LLM (air-gapped Llama) + VECTOR SEARCH (ChromaDB) → plain English in, cited evidence out — zero cloud, zero leak`
 
-**Beat 11 · WP10 — click Run GNN Link Prediction** *(REHEARSED SILENCE)*
-- **Say (setup):** "So I ask the machine to find the connection no human has made." *(click — then STEP BACK from the mouse)*
-- **⏸ [SILENCE — ~2 seconds. Look at the audience, not the screen.]**
-- **Say (payoff, quieter):** "There. A **third suspect** — hidden behind money split across a chain of wallets. Found in seconds, because the machine reads every relationship at once.
+**B9 · WP8 — Subject-B chip** *(trace runs ~5.6s — narrate over it)*
+- **Say:** "Watch it **think out loud**: it plans → queries the **knowledge graph in Cypher** → pulls the top matches from the **vector store** → and then a **verifier re-derives every claim** before I ever see it.
+  Every sentence lands with a **citation and an Evidence Confidence Score**. This system never says *trust me*. It says: **here's where I got that.**"
+- 🧠 **CARD:** `AGENT TRACE (plan→graph→vectors→verify) + ECS SCORING → court-replayable AI reasoning, every claim sourced`
+
+> *Bridge:* "That's what we know. Cases aren't lost on what we know — they're lost on what we can't see."
+
+---
+
+## CH 3 — THE ONE NOBODY SAW *(WP9–10)* · 🏆 MONEY SHOT
+
+**B10 · WP9 — Entity Graph**
+- **Say:** "The confirmed network — people, phones, wallets — every edge evidence-backed, living in a **Neo4j knowledge graph**. And somewhere past its edge… someone thinks he's invisible."
+- 🧠 **CARD:** `KNOWLEDGE GRAPH (38 entities · 91 edges) → the case as connections, not folders`
+
+**B11 · WP10 — Run GNN Link Prediction** *(REHEARSED SILENCE)*
+- **Say (setup):** "So I ask a **graph neural network** to find the connection no human has made." *(click — step back from the mouse)*
+- **⏸ [SILENCE ~2s — look at the audience]**
+- **Say (payoff, quieter):** "There. A **hidden third suspect** — found through a **crypto peel-chain**: money split across a dozen wallets to disappear. The GNN read **every relationship at once** — ninety-one percent confidence, **verified by re-derivation** before it ever reached my screen.
   That's a door getting knocked on… that never would have been."
-- **Depth:** "A graph neural network doing link prediction — the crypto peel-chain pattern, ninety-one percent confidence, verified by re-derivation before it's ever shown to me."
+- 🧠 **CARD:** `GNN LINK PREDICTION + PEEL-CHAIN ANALYTICS → the invisible suspect, surfaced in seconds — 0.91 confidence, verifier-checked`
+
+> *Bridge:* "One image tied to him looks like a real photograph. Let's find out."
 
 ---
 
-## CHAPTER 4 — REAL, OR MACHINE-MADE *(WP11–12)*
+## CH 4 — REAL, OR MACHINE-MADE *(WP11–12)*
 
-**Beat 12 · WP11 — click Synthetic Detection**
-- **Say:** "There's a new cruelty in this fight: the material itself can be machine-made. AI-generated abuse imagery is up over a **thousand percent** — and it fools trained eyes."
+**B12 · WP11 — Synthetic Detection**
+- **Say:** "The new cruelty: the material itself can be machine-made. **AI-generated abuse imagery is up over a thousand percent** — and it fools trained eyes. Hash lists are blind to it. So we built the **DeepFake Shield**."
+- 🧠 **CARD:** `3-STREAM ENSEMBLE (DINOv2 texture · facial geometry · CLIP semantics) + A/V SYNC + LENS-PHYSICS CHECK → catches what hash-matching never can`
 
-**Beat 13 · WP12 — click Re-analyze**
-- **Say:** "So we don't trust any single detector. Four independent signals *vote* — texture, geometry, meaning, sound. Verdict: **ninety-eight point two percent, machine-made.**
-  And that verdict matters — because it redirects the search for a real child. In this work, sending help to the *right* door, faster… is everything."
+**B13 · WP12 — Re-analyze**
+- **Say:** "Not one fragile classifier — **four independent signals vote**: texture, geometry, meaning, and audio-video sync. Even **lens physics** — real cameras blur in ways diffusion models can't fake. Verdict: **98.2% — machine-made.**
+  Why it matters: that verdict **redirects the search for a real child**. Sending help to the *right* door, faster — that's everything."
+- 🧠 **CARD:** `ENSEMBLE VOTING → 98.2% verdict + victim-ID resources aimed at real children`
 
----
-
-## CHAPTER 5 — HONESTY, ON THE RECORD *(WP13–14)*
-
-**Beat 14 · WP13 — click Court Report**
-- **Say:** "Courts don't accept dashboards. They accept evidence with a paper trail. One click drafts the full legal report — in the exact format our Evidence Act demands."
-
-**Beat 15 · WP14 — click Generate report**
-- **Say:** "And this is my favourite line in the whole system. **Forty-one of forty-two AI statements — grounded in sealed evidence.** The one that didn't clear the bar? Struck out. In red. *On the record.*
-  We don't hide the machine's doubt. **We file it.**"
-- **Depth:** "Every generated sentence gets an evidence-confidence score; below the admissibility gate, it's excluded and disclosed — that's what makes this survivable under cross-examination."
-
-> *Transition:* "Now zoom out — because the man in this case has never respected our case boundaries."
+> *Bridge:* "Findings confirmed. Now make them survive a courtroom."
 
 ---
 
-## CHAPTER 6 — NO CASE STANDS ALONE *(WP15–18)*
+## CH 5 — HONESTY, ON THE RECORD *(WP13–14)*
 
-**Beat 16 · WP15 — click the case chip (return to Vault)**
-- **Say:** "Back to the vault. Pull wide — every island is a sealed case."
+**B14 · WP13 — Court Report**
+- **Say:** "Courts don't accept dashboards. One click drafts the full legal report — **auto-formatted to Section 63 of our Evidence Act**, certificates and all."
+- 🧠 **CARD:** `AUTO §63 BSA CERTIFICATION + HASH MANIFEST → hours of legal drafting → one click`
 
-**Beat 17 · WP16 — click Fusion View**
-- **Say:** "And there — **gold threads.** Connections the system found between cases that were never meant to meet."
+**B15 · WP14 — Generate report**
+- **Say:** "And my favourite line in the whole system — the **honesty engine**. Every AI sentence is **hallucination-scored**: **41 of 42 claims grounded** in sealed evidence. The one that failed the bar? **Struck out, in red, on the record.**
+  We don't hide the machine's doubt. **We file it.** That's what survives cross-examination."
+- 🧠 **CARD:** `HERAM HALLUCINATION SCORING + ECS ADMISSIBILITY GATE (≥0.85) → 41/42 grounded, 1 disclosed — honesty as a feature`
 
-**Beat 18 · WP17 — click the gold thread**
-- **Say:** "This one is the same crypto wallet appearing in two unrelated investigations. Ninety-one percent match. That's not a coincidence. **That's a network.**"
-
-**Beat 19 · WP18 — click Propose joint investigation**
-- **Say:** "One click proposes a joint case — routed to a supervisor, a human decision.
-  And notice what did *not* happen: **no files moved.** Agencies share the lead — never the evidence. Nothing sensitive ever leaves the building."
+> *Bridge:* "Now zoom out — this man never respected our case boundaries."
 
 ---
 
-## CHAPTER 7 — EVERYTHING, DISTILLED *(WP19–20)* · 🏆 HERO DIVE
+## CH 6 — NO CASE STANDS ALONE *(WP15–18)*
 
-**Beat 20 · WP19 — click Rise to the Intelligence Crown**
-- **Say:** "At the top of the island sits the risk verdict. Ninety-seven. And every single point of it can be walked backwards to the exhibit that earned it. If a defence lawyer asks *why ninety-seven?* — we show them. Line by line. **No black box goes to court.**"
+**B16 · WP15 — case chip (return to Vault)**
+- **Say:** "Back to the vault. Pull wide — every island, one sealed case."
 
-**Beat 21 · WP20 — click Compile Case Report** *(REHEARSED SILENCE)*
-- **Say (setup):** "Now — my favourite four seconds of everything we built. Compile." *(click — hands off)*
-- **⏸ [SILENCE — the camera dives down through the layers. Let it fall.]**
-- **Say (payoff, slow):** "Everything this case knows… pours down through the layers… and settles into a single court document.
-  **Intelligence — becoming testimony.**"
+**B17 · WP16 — Fusion View**
+- **Say:** "**Gold threads** — cross-case links the **GNN found across the entire archive**, between investigations that never met."
+- 🧠 **CARD:** `CROSS-CASE GNN FUSION → serial networks exposed across the whole vault`
+
+**B18 · WP17 — the gold thread**
+- **Say:** "This thread: the **same crypto wallet cluster** in two unrelated cases — **91% match**. That's not a coincidence. **That's a network.**"
+- 🧠 **CARD:** `WALLET CLUSTERING + TAGNN INFERENCE → two cases, one offender ring`
+
+**B19 · WP18 — Propose joint investigation**
+- **Say:** "One click proposes a joint case — routed to a **human supervisor**. And notice what did NOT happen: **no files moved.** Agencies share the *lead*, never the evidence — the model travels, **the data never does**. That's **federated by design**."
+- 🧠 **CARD:** `FEDERATED ARCHITECTURE + HUMAN APPROVAL GATE → collaboration without a single file leaving home`
+
+> *Bridge:* "Last step — the verdict, and closing the loop into court."
 
 ---
 
-## CHAPTER 8 — THE CHAIN CLOSES *(WP21)*
+## CH 7 — EVERYTHING, DISTILLED *(WP19–20)* · 🏆 HERO DIVE
 
-**Beat 22 · WP21 — click Sign & Seal**
-- **Say:** "One signature. The draft watermark dissolves. The report's own fingerprint anchors into the custody chain. And the vault gem turns **green**."
-- *(Turn fully to the room. Screen's job is done.)*
-- **Say:** "The chain we started with a knock on a door… just closed in a courtroom."
+**B20 · WP19 — Rise to the Intelligence Crown**
+- **Say:** "The crown: **composite risk 97** — fused from content severity, behaviour patterns, network position, recency. And **every single point walks backwards to the exhibit that earned it**. Defence asks *why 97?* — we show them. Line by line. **No black box goes to court.**"
+- 🧠 **CARD:** `COMPOSITE RISK SCORING + PROOF-CHIP TRACEBACK → an explainable verdict, not a mystery number`
+
+**B21 · WP20 — Compile Case Report** *(REHEARSED SILENCE)*
+- **Say (setup):** "My favourite four seconds of everything we built. **Compile.**" *(click — hands off)*
+- **⏸ [SILENCE — the camera dives down the strata. Let it fall.]**
+- **Say (payoff, slow):** "Everything this case knows — the sealed lake, the meaning, the graph, the verdict — **pours down through the layers** and settles into one court document.
+  **Intelligence… becoming testimony.**"
+- 🧠 **CARD:** `STRATA-TO-REPORT PIPELINE → every citation traced to its evidence layer, visibly`
 
 ---
 
-## 🎬 THE CLOSE (~25 seconds — to the room)
+## CH 8 — THE CHAIN CLOSES *(WP21)*
 
-> "Forget the 3D. Forget the graphs. Keep three numbers.
+**B22 · WP21 — Sign & Seal**
+- **Say:** "One signature. The watermark dissolves, the report's **own hash anchors into the custody chain**, and the vault gem turns **green**."
+- *(Turn fully to the room.)*
+- **Say:** "The chain that began with a knock on a door… **just closed in a courtroom.**"
+- 🧠 **CARD:** `REPORT HASH → CUSTODY ANCHOR → the loop is cryptographically whole`
+
+---
+
+## 🎬 CLOSE (~25s, to the room)
+> "Keep three numbers.
 > **Forty-seven minutes** — the new nine months.
-> **Ninety-one percent** — how much less of the worst material a human being had to see today. Three hundred seventy-five thousand files cleared without a single human eye on them.
+> **Ninety-one percent** — less of the worst material any human saw today. **375,000 files, cleared without one human eye.**
 > And **one** — one child, reached sooner, because nothing had to wait.
 > *(beat)*
-> And the part that scales: every agency that deploys this makes every other agency stronger — **without a single file ever leaving home.**
-> AEGIS-X. From terabytes to testimony. Thank you."
+> And the moat: every deployment makes every other agency **stronger** — without a single file leaving home.
+> **AEGIS-X. From terabytes to testimony.** Thank you."
 
 ---
 
-## 🛟 Recovery lines *(stall gracefully, then tap ►)*
-- **Genesis auto-run feels long (WP2):** "Take this fifteen seconds in — it's standing in for nine months of someone's life."
-- **Agent trace slow (WP8):** "While it reasons — every step you're watching is logged, so a court can replay the machine's thinking."
-- **GNN spinner hangs (WP10):** "It's weighing thousands of relationships at once — the ones no human has time to check." *(►)*
-- **Report/dive stalls (WP14/20):** "While it compiles — every line in that document traces to a hash-sealed exhibit." *(►)*
-- **Vault redraw (WP15/16):** "While the vault redraws — each island is one sealed case. Sovereign, but searchable together." *(►)*
-- **Anything else:** "While that catches up—" *(► and deliver the next beat's line as if nothing happened. Never apologize to the demo.)*
+## 🗂️ THE 10 FLASHCARDS (whole pitch on one palm)
+| # | Keywords | One-liner payoff |
+|---|---|---|
+| 1 | **SHA-256 + post-quantum seal** | custody from second zero |
+| 2 | **4 AI lanes + PhotoDNA prefilter** | 9 months → 47 min |
+| 3 | **Verifier Agent** | an AI paid to doubt the AIs |
+| 4 | **RAG + local Llama, air-gapped** | ask the evidence, get citations |
+| 5 | **GNN link prediction + peel-chain** | the suspect nobody saw |
+| 6 | **3-stream DeepFake ensemble** | catches what hash-lists can't |
+| 7 | **HERAM + ECS gate** | 41/42 grounded — doubt is filed, not hidden |
+| 8 | **Cross-case fusion, federated** | networks exposed, data never moves |
+| 9 | **Composite risk + traceback** | no black box goes to court |
+| 10 | **Report hash → custody anchor** | the chain closes, gem turns green |
 
----
+## 🛟 Recovery lines *(stall → line → ►)*
+- **WP2 auto-run:** "Fifteen seconds, standing in for nine months of someone's life."
+- **WP8 trace:** "Every reasoning step is being logged — a court can replay this thinking."
+- **WP10 spinner:** "It's weighing thousands of relationships at once — the ones nobody has time to check." *(►)*
+- **WP14/20:** "Every line in that document traces to a hash-sealed exhibit." *(►)*
+- **WP15/16 vault:** "Each island is one sealed case — sovereign, but searchable together." *(►)*
+- **Generic:** "While that catches up—" *(► — deliver the next line as if nothing happened. Never apologize to a demo.)*
 
-## ⚡ Q&A pivot — top 5, two lines each
-1. **"Why would a court trust an AI verdict?"** — It never has to. We produce *evidence, not verdicts*: explainable, hash-traceable, hallucination-scored, Section-63 certified — and the human stays the author of record.
-2. **"How do you train without illegal data?"** — We never touch it. Transfer learning from benign tasks, synthetic proxies, and hash-only lists (Project VIC / CAID); anything sensitive is tuned inside the agency, under its own legal authority.
-3. **"False positives ruin lives."** — Agreed — which is why AEGIS decides nothing. Every flag is human-in-the-loop, with a heat-map of *why* and a confidence score; doubt goes to a review queue, never to a door.
-4. **"How is this different from Cellebrite?"** — They extract; we *fuse and prove*. One sovereign graph across media, chat, crypto, and time — with synthetic detection and Indian-law court output. We sit on top of their exports; we're the brain, not the screwdriver.
-5. **"Is the AI real, or simulated?"** — The console and the workflow are real; the inference is scripted for this demo — honestly disclosed. Every technique shown is research-validated and buildable today; that integration *is* the roadmap.
+## ⚡ Q&A — top 5, two lines each
+1. **"Why would a court trust AI?"** — It doesn't have to: we file *evidence, not verdicts* — explainable, hash-traceable, hallucination-scored, §63-certified; the human stays the author.
+2. **"Training data?"** — We never touch illegal material: transfer learning, synthetic proxies, hash-only lists (Project VIC/CAID); sensitive tuning happens inside the agency's own authority.
+3. **"False positives?"** — AEGIS decides nothing. Every flag is human-in-the-loop with a Grad-CAM heat-map of *why* + a confidence score; doubt goes to review, never to a door.
+4. **"vs Cellebrite?"** — They extract; we **fuse and prove**. One sovereign graph across media, chat, crypto, time — synthetic detection + Indian-law output. We ingest their exports; we're the brain on top.
+5. **"Is the AI real?"** — Console and workflow: real. Inference: scripted for this demo, honestly disclosed. Every technique shown is research-validated and buildable — that integration *is* the roadmap.
 
----
+## 🎯 Delivery notes
+- The **CARDS are your memory palace** — 10 flashcards = the whole pitch. Drill them, not the prose.
+- Tech names are **spoken weapons**: say them clean and confident — *"a graph neural network"*, *"retrieval-augmented generation"* — each followed instantly by its plain-words payoff. Name → meaning → number. Never two tech names back-to-back.
+- **Silences are trust moves.** Hands visibly off the mouse both times.
+- Numbers land bare: *forty-seven minutes. Ninety-one percent. Forty-one of forty-two.*
+- If everything crashes: close the laptop halfway and tell the one-desk story end to end. **The story is the product.**
 
-## 🎯 Delivery notes (read once before stage)
-- **The refrain is the speech.** "The chain begins" (Beat 2) → "the chain holds" (Beat 3) → "the chain closes" (Beat 22). Hit all three cleanly and the room will hand you the narrative.
-- **Look at people during silences.** The two [SILENCE] beats are trust moves — you're telling the room the product doesn't need you to talk over it.
-- **Numbers land bare.** Never "approximately," never "around." *Forty-seven minutes. Ninety-one percent. Forty-one of forty-two.*
-- **The heart-lines are non-negotiable; the Depth-lines are ballast** — drop them if time runs hot. The demo should breathe, not sprint.
-- **If everything crashes:** close the laptop half-way, look up, and tell them the room-with-one-desk story from the open, end to end. The story *is* the product.
-
-### Structure: 22 waypoint beats · open + close · 3-hit chain refrain · 2 rehearsed silences · 6 recovery lines · 5-question Q&A · delivery notes.
+### Structure: 22 beats × (CLICK+SAY+CARD) · 10 flashcards · chain refrain ×3 · 2 silences · 6 recoveries · 5 Q&A.
