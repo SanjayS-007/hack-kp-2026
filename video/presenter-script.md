@@ -1,5 +1,5 @@
-# AEGIS-X — LIVE STAGE Presenter Script · v3 "Heart + Firepower"
-### "Operation Sentinel" · Demo Mode · ~4 min · 22 waypoints
+# AEGIS-X — LIVE STAGE Presenter Script · v3.1 "Heart + Firepower" (tight cut)
+### "Operation Sentinel" · Demo Mode · ~3 min · 18 waypoints
 > Every beat = **CLICK** → **SAY** (tech named out loud, punchy) → **🧠 CARD** (keyword chips: what we use → what it gives). Memorize the CARDS — they're your flashcards; if you remember nothing else, say the card.
 > Run: `?reset` → `D` → follow the spotlight. Stall? tap **►**, use recovery line. Two **[SILENCE]** beats — hands off, look at the room.
 > Refrain: **"the chain begins → holds → closes."** All data fictional; victim = a labelled node, never more.
@@ -82,54 +82,24 @@
   That's a door getting knocked on… that never would have been."
 - 🧠 **CARD:** `GNN LINK PREDICTION + PEEL-CHAIN ANALYTICS → the invisible suspect, surfaced in seconds — 0.91 confidence, verifier-checked`
 
-> *Bridge:* "One image tied to him looks like a real photograph. Let's find out."
+> *Bridge (straight to the finale):* "We found the network. Now watch the whole case become a court document — the part I love most."
 
 ---
 
-## CH 4 — REAL, OR MACHINE-MADE *(WP11–12)*
+## CH 4 — NO CASE STANDS ALONE *(WP11–14)*
 
-**B12 · WP11 — Synthetic Detection**
-- **Say:** "The new cruelty: the material itself can be machine-made. **AI-generated abuse imagery is up over a thousand percent** — and it fools trained eyes. Hash lists are blind to it. So we built the **DeepFake Shield**."
-- 🧠 **CARD:** `3-STREAM ENSEMBLE (DINOv2 texture · facial geometry · CLIP semantics) + A/V SYNC + LENS-PHYSICS CHECK → catches what hash-matching never can`
-
-**B13 · WP12 — Re-analyze**
-- **Say:** "Not one fragile classifier — **four independent signals vote**: texture, geometry, meaning, and audio-video sync. Even **lens physics** — real cameras blur in ways diffusion models can't fake. Verdict: **98.2% — machine-made.**
-  Why it matters: that verdict **redirects the search for a real child**. Sending help to the *right* door, faster — that's everything."
-- 🧠 **CARD:** `ENSEMBLE VOTING → 98.2% verdict + victim-ID resources aimed at real children`
-
-> *Bridge:* "Findings confirmed. Now make them survive a courtroom."
-
----
-
-## CH 5 — HONESTY, ON THE RECORD *(WP13–14)*
-
-**B14 · WP13 — Court Report**
-- **Say:** "Courts don't accept dashboards. One click drafts the full legal report — **auto-formatted to Section 63 of our Evidence Act**, certificates and all."
-- 🧠 **CARD:** `AUTO §63 BSA CERTIFICATION + HASH MANIFEST → hours of legal drafting → one click`
-
-**B15 · WP14 — Generate report**
-- **Say:** "And my favourite line in the whole system — the **honesty engine**. Every AI sentence is **hallucination-scored**: **41 of 42 claims grounded** in sealed evidence. The one that failed the bar? **Struck out, in red, on the record.**
-  We don't hide the machine's doubt. **We file it.** That's what survives cross-examination."
-- 🧠 **CARD:** `HERAM HALLUCINATION SCORING + ECS ADMISSIBILITY GATE (≥0.85) → 41/42 grounded, 1 disclosed — honesty as a feature`
-
-> *Bridge:* "Now zoom out — this man never respected our case boundaries."
-
----
-
-## CH 6 — NO CASE STANDS ALONE *(WP15–18)*
-
-**B16 · WP15 — case chip (return to Vault)**
+**B12 · WP11 — case chip (return to Vault)**
 - **Say:** "Back to the vault. Pull wide — every island, one sealed case."
 
-**B17 · WP16 — Fusion View**
+**B13 · WP12 — Fusion View**
 - **Say:** "**Gold threads** — cross-case links the **GNN found across the entire archive**, between investigations that never met."
 - 🧠 **CARD:** `CROSS-CASE GNN FUSION → serial networks exposed across the whole vault`
 
-**B18 · WP17 — the gold thread**
+**B14 · WP13 — the gold thread**
 - **Say:** "This thread: the **same crypto wallet cluster** in two unrelated cases — **91% match**. That's not a coincidence. **That's a network.**"
 - 🧠 **CARD:** `WALLET CLUSTERING + TAGNN INFERENCE → two cases, one offender ring`
 
-**B19 · WP18 — Propose joint investigation**
+**B15 · WP14 — Propose joint investigation**
 - **Say:** "One click proposes a joint case — routed to a **human supervisor**. And notice what did NOT happen: **no files moved.** Agencies share the *lead*, never the evidence — the model travels, **the data never does**. That's **federated by design**."
 - 🧠 **CARD:** `FEDERATED ARCHITECTURE + HUMAN APPROVAL GATE → collaboration without a single file leaving home`
 
@@ -137,13 +107,13 @@
 
 ---
 
-## CH 7 — EVERYTHING, DISTILLED *(WP19–20)* · 🏆 HERO DIVE
+## CH 5 — EVERYTHING, DISTILLED *(WP15–16)* · 🏆 HERO DIVE
 
-**B20 · WP19 — Rise to the Intelligence Crown**
+**B16 · WP15 — Rise to the Intelligence Crown**
 - **Say:** "The crown: **composite risk 97** — fused from content severity, behaviour patterns, network position, recency. And **every single point walks backwards to the exhibit that earned it**. Defence asks *why 97?* — we show them. Line by line. **No black box goes to court.**"
 - 🧠 **CARD:** `COMPOSITE RISK SCORING + PROOF-CHIP TRACEBACK → an explainable verdict, not a mystery number`
 
-**B21 · WP20 — Compile Case Report** *(REHEARSED SILENCE)*
+**B17 · WP16 — Compile Case Report** *(REHEARSED SILENCE)*
 - **Say (setup):** "My favourite four seconds of everything we built. **Compile.**" *(click — hands off)*
 - **⏸ [SILENCE — the camera dives down the strata. Let it fall.]**
 - **Say (payoff, slow):** "Everything this case knows — the sealed lake, the meaning, the graph, the verdict — **pours down through the layers** and settles into one court document.
@@ -152,10 +122,11 @@
 
 ---
 
-## CH 8 — THE CHAIN CLOSES *(WP21)*
+## CH 6 — THE CHAIN CLOSES *(WP17)*
 
-**B22 · WP21 — Sign & Seal**
-- **Say:** "One signature. The watermark dissolves, the report's **own hash anchors into the custody chain**, and the vault gem turns **green**."
+**B18 · WP17 — Sign & Seal**
+- **Say:** "The report assembled itself from the dive — and look: **41 of 42 AI claims grounded in sealed evidence; the one that failed is struck out in red, on the record.** We don't hide the machine's doubt — **we file it.**
+  Now, one signature. The watermark dissolves, the report's **own hash anchors into the custody chain**, and the vault gem turns **green**."
 - *(Turn fully to the room.)*
 - **Say:** "The chain that began with a knock on a door… **just closed in a courtroom.**"
 - 🧠 **CARD:** `REPORT HASH → CUSTODY ANCHOR → the loop is cryptographically whole`
@@ -209,4 +180,4 @@
 - Numbers land bare: *forty-seven minutes. Ninety-one percent. Forty-one of forty-two.*
 - If everything crashes: close the laptop halfway and tell the one-desk story end to end. **The story is the product.**
 
-### Structure: 22 beats × (CLICK+SAY+CARD) · 10 flashcards · chain refrain ×3 · 2 silences · 6 recoveries · 5 Q&A.
+### Structure: 18 beats × (CLICK+SAY+CARD) · 10 flashcards · chain refrain ×3 · 2 silences · 6 recoveries · 5 Q&A. *(Synthetic Detection + interim report visit cut from the live walk — kept as flashcards #6/#7 and Q&A ammo; the dive-assembled report carries the 41/42 honesty beat.)*
