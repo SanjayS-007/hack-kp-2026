@@ -10,7 +10,8 @@ import { VAULT_CASES, GRAPH } from '../../data/mockData';
 import { batchInspector, entityInspector, pointFileInspector } from '../../data/inspector';
 import { useCaseStore, setActiveCase } from '../../store/caseStore';
 import { useReportSealed } from '../../store/reportStore';
-import { startDemo } from '../../store/demoStore';
+import { startDemo, getDemo } from '../../store/demoStore';
+import { WAYPOINTS } from '../../data/demoWaypoints';
 import { dur } from '../../lib/speed';
 
 const BASE = import.meta.env.BASE_URL || '/';
@@ -100,6 +101,18 @@ export default function Vault3D() {
   useEffect(() => {
     if (bootstrapped.current || !data) return;
     bootstrapped.current = true;
+    // Guided-demo shortcut: after the GNN reveal, returning to the vault jumps
+    // straight to the Crown with the Compile panel open — no fusion/crown detour.
+    const demo = getDemo();
+    const demoWp = demo.on ? WAYPOINTS[demo.waypoint]?.id : null;
+    if (demoWp === 'compile-report') {
+      const target = createdId || cases[0]?.id;
+      bootTimer.current = setTimeout(() => {
+        setView((v) => ({ ...v, pose: 'P5', focus: target }));
+        setProofsOpen(true);
+      }, dur(150));
+      return;
+    }
     if (createdId) bootTimer.current = setTimeout(() => setView((v) => ({ ...v, pose: 'P1', focus: createdId })), dur(150));
   }, [data, createdId]);
 

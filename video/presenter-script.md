@@ -1,5 +1,5 @@
-# AEGIS-X — LIVE STAGE Presenter Script · v3.1 "Heart + Firepower" (tight cut)
-### "Operation Sentinel" · Demo Mode · ~3 min · 18 waypoints
+# AEGIS-X — LIVE STAGE Presenter Script · v3.2 "Heart + Firepower" (tightest cut)
+### "Operation Sentinel" · Demo Mode · ~2½ min · 14 waypoints
 > Every beat = **CLICK** → **SAY** (tech named out loud, punchy) → **🧠 CARD** (keyword chips: what we use → what it gives). Memorize the CARDS — they're your flashcards; if you remember nothing else, say the card.
 > Run: `?reset` → `D` → follow the spotlight. Stall? tap **►**, use recovery line. Two **[SILENCE]** beats — hands off, look at the room.
 > Refrain: **"the chain begins → holds → closes."** All data fictional; victim = a labelled node, never more.
@@ -86,45 +86,24 @@
 
 ---
 
-## CH 4 — NO CASE STANDS ALONE *(WP11–14)*
+## CH 4 — DISTILLED INTO TESTIMONY *(WP11–13)* · 🏆 HERO DIVE
 
-**B12 · WP11 — case chip (return to Vault)**
-- **Say:** "Back to the vault. Pull wide — every island, one sealed case."
+**B12 · WP11 — case chip → Back to the Vault**
+- **Say:** "Back to the vault — and it opens straight at the case's **risk crown: composite risk 97**, fused from content severity, behaviour, network position, recency. And **every point walks backward to the exhibit that earned it.** No black box goes to court."
+- 🧠 **CARD:** `COMPOSITE RISK + PROOF-CHIP TRACEBACK → an explainable verdict, not a mystery number`
 
-**B13 · WP12 — Fusion View**
-- **Say:** "**Gold threads** — cross-case links the **GNN found across the entire archive**, between investigations that never met."
-- 🧠 **CARD:** `CROSS-CASE GNN FUSION → serial networks exposed across the whole vault`
-
-**B14 · WP13 — the gold thread**
-- **Say:** "This thread: the **same crypto wallet cluster** in two unrelated cases — **91% match**. That's not a coincidence. **That's a network.**"
-- 🧠 **CARD:** `WALLET CLUSTERING + TAGNN INFERENCE → two cases, one offender ring`
-
-**B15 · WP14 — Propose joint investigation**
-- **Say:** "One click proposes a joint case — routed to a **human supervisor**. And notice what did NOT happen: **no files moved.** Agencies share the *lead*, never the evidence — the model travels, **the data never does**. That's **federated by design**."
-- 🧠 **CARD:** `FEDERATED ARCHITECTURE + HUMAN APPROVAL GATE → collaboration without a single file leaving home`
-
-> *Bridge:* "Last step — the verdict, and closing the loop into court."
-
----
-
-## CH 5 — EVERYTHING, DISTILLED *(WP15–16)* · 🏆 HERO DIVE
-
-**B16 · WP15 — Rise to the Intelligence Crown**
-- **Say:** "The crown: **composite risk 97** — fused from content severity, behaviour patterns, network position, recency. And **every single point walks backwards to the exhibit that earned it**. Defence asks *why 97?* — we show them. Line by line. **No black box goes to court.**"
-- 🧠 **CARD:** `COMPOSITE RISK SCORING + PROOF-CHIP TRACEBACK → an explainable verdict, not a mystery number`
-
-**B17 · WP16 — Compile Case Report** *(REHEARSED SILENCE)*
-- **Say (setup):** "My favourite four seconds of everything we built. **Compile.**" *(click — hands off)*
-- **⏸ [SILENCE — the camera dives down the strata. Let it fall.]**
+**B13 · WP12 — Compile Case Report** *(REHEARSED SILENCE)*
+- **Say (setup):** "Now — my favourite four seconds of everything we built. **Compile.**" *(click — hands off)*
+- **⏸ [SILENCE — the camera dives down through the strata. Let it fall.]**
 - **Say (payoff, slow):** "Everything this case knows — the sealed lake, the meaning, the graph, the verdict — **pours down through the layers** and settles into one court document.
   **Intelligence… becoming testimony.**"
 - 🧠 **CARD:** `STRATA-TO-REPORT PIPELINE → every citation traced to its evidence layer, visibly`
 
 ---
 
-## CH 6 — THE CHAIN CLOSES *(WP17)*
+## CH 5 — THE CHAIN CLOSES *(WP13)*
 
-**B18 · WP17 — Sign & Seal**
+**B14 · WP13 — Sign & Seal**
 - **Say:** "The report assembled itself from the dive — and look: **41 of 42 AI claims grounded in sealed evidence; the one that failed is struck out in red, on the record.** We don't hide the machine's doubt — **we file it.**
   Now, one signature. The watermark dissolves, the report's **own hash anchors into the custody chain**, and the vault gem turns **green**."
 - *(Turn fully to the room.)*
@@ -162,8 +141,8 @@
 - **WP2 auto-run:** "Fifteen seconds, standing in for nine months of someone's life."
 - **WP8 trace:** "Every reasoning step is being logged — a court can replay this thinking."
 - **WP10 spinner:** "It's weighing thousands of relationships at once — the ones nobody has time to check." *(►)*
-- **WP14/20:** "Every line in that document traces to a hash-sealed exhibit." *(►)*
-- **WP15/16 vault:** "Each island is one sealed case — sovereign, but searchable together." *(►)*
+- **WP12 dive/compile stalls:** "Every line in that document traces to a hash-sealed exhibit." *(►)*
+- **WP11 vault redraw:** "The vault's opening straight at the risk crown — every point traces to its evidence." *(►)*
 - **Generic:** "While that catches up—" *(► — deliver the next line as if nothing happened. Never apologize to a demo.)*
 
 ## ⚡ Q&A — top 5, two lines each
@@ -180,4 +159,4 @@
 - Numbers land bare: *forty-seven minutes. Ninety-one percent. Forty-one of forty-two.*
 - If everything crashes: close the laptop halfway and tell the one-desk story end to end. **The story is the product.**
 
-### Structure: 18 beats × (CLICK+SAY+CARD) · 10 flashcards · chain refrain ×3 · 2 silences · 6 recoveries · 5 Q&A. *(Synthetic Detection + interim report visit cut from the live walk — kept as flashcards #6/#7 and Q&A ammo; the dive-assembled report carries the 41/42 honesty beat.)*
+### Structure: 14 beats × (CLICK+SAY+CARD) · 10 flashcards · chain refrain ×3 · 2 silences · recoveries · 5 Q&A. *(Synthetic Detection, interim report visit, and the cross-case fusion arc are cut from the live walk — kept as flashcards #6/#8 + Q&A ammo. After the GNN reveal the demo returns to the vault, which opens straight at the risk Crown → Compile dive → Sign & Seal.)*

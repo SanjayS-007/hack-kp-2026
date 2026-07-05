@@ -21,11 +21,7 @@ export const WAYPOINTS = [
   { id: 'ask-chip', selector: '[data-demo="ask-chip"]', caption: 'Ask about Subject-B', note: 'Watch the agent trace + citations', route: '/ask' },
   { id: 'nav-graph', selector: '[data-demo="nav-graph"]', caption: 'Entity Graph', note: 'Fusion knowledge graph', route: '/ask' },
   { id: 'graph-gnn', selector: '[data-demo="graph-gnn"]', caption: 'Run GNN Link Prediction', note: 'Reveals hidden Subject-C', route: '/graph' },
-  { id: 'return-vault', selector: '[data-demo="return-vault"]', caption: 'Back to the Vault', note: 'Click the case chip — pull back to the Fusion Vault', route: '/graph' },
-  { id: 'fusion-view', selector: '[data-demo="fusion-view"]', caption: 'Fusion View', note: 'Cross-case threads arc between islands (3D)', route: '/' },
-  { id: 'fusion-thread', selector: '[data-demo="fusion-thread"]', caption: 'Open the gold thread', note: 'Shared wallet cluster · 0.91', route: '/' },
-  { id: 'propose-joint', selector: '[data-demo="propose-joint"]', caption: 'Propose joint investigation', note: 'JOINT-2026-0091 — pending supervisor approval', route: '/' },
-  { id: 'nav-crown', selector: '[data-demo="nav-crown"]', caption: 'Rise to the Intelligence Crown', note: 'Risk proof opens automatically', route: '/' },
+  { id: 'return-vault', selector: '[data-demo="return-vault"]', caption: 'Back to the Vault', note: 'Click the case chip — the vault opens straight at the Crown', route: '/graph' },
   { id: 'compile-report', selector: '[data-demo="compile-report"]', caption: 'Compile Case Report', note: 'Dive down the strata → citations land in the court document', route: '/' },
   { id: 'report-seal', selector: '[data-demo="report-seal"]', caption: 'Sign & Seal the report', note: 'Signatures fill → watermark dissolves → vault crown flips green', waitEnabled: true, route: '/report' },
 ];
