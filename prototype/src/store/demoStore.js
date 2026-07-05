@@ -78,6 +78,22 @@ export function advanceWaypoint(total) {
   return next;
 }
 
+// Step back to the previous *revisitable* waypoint. Waypoints marked backSkip
+// (the Genesis wizard beats — destructive, forward-only stages) are hopped over:
+// once the case is sealed those targets no longer exist, so landing on them
+// would strand the spotlight. The floor is the first non-backSkip waypoint;
+// if we're still inside Genesis itself, back is a no-op.
+export function stepBackWaypoint(waypoints) {
+  const cur = read();
+  if (!cur.on) return cur;
+  let i = (cur.waypoint || 0) - 1;
+  while (i >= 0 && waypoints[i]?.backSkip) i -= 1;
+  if (i < 0) return cur; // nothing revisitable behind us — stay put
+  const next = { ...cur, waypoint: i };
+  write(next);
+  return next;
+}
+
 export function setWaypoint(i) {
   return setDemo({ waypoint: i });
 }

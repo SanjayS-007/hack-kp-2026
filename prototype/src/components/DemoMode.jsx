@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { Play, Pause, X, MousePointer2, Gauge, ChevronRight, ChevronsRight, CheckCircle2 } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Play, Pause, X, MousePointer2, Gauge, ChevronRight, ChevronsRight, ChevronsLeft, CheckCircle2 } from 'lucide-react';
 import { WAYPOINTS } from '../data/demoWaypoints';
 import {
   useDemo,
   advanceWaypoint,
+  stepBackWaypoint,
   exitDemo,
   togglePause,
   toggleCursorFx,
@@ -12,6 +14,12 @@ import {
 } from '../store/demoStore';
 
 const TOTAL = WAYPOINTS.length;
+
+// Is there any revisitable (non-backSkip) waypoint behind index i?
+const canStepBack = (i) => {
+  for (let j = i - 1; j >= 0; j -= 1) if (!WAYPOINTS[j].backSkip) return true;
+  return false;
+};
 const isTyping = () => {
   const t = document.activeElement?.tagName;
   return t === 'INPUT' || t === 'TEXTAREA';
@@ -161,8 +169,9 @@ function Spotlight({ waypoint }) {
 }
 
 // ── floating HUD ─────────────────────────────────────────────────
-function Hud({ demo }) {
+function Hud({ demo, onBack }) {
   const done = demo.waypoint >= TOTAL;
+  const backOk = canStepBack(Math.min(demo.waypoint, TOTAL));
   return (
     <div className="no-print pointer-events-auto fixed bottom-4 left-1/2 z-[80] -translate-x-1/2">
       <div className="card-3 flex items-center gap-3 rounded-full px-4 py-2 text-xs">
@@ -170,6 +179,17 @@ function Hud({ demo }) {
           {done ? <CheckCircle2 size={14} /> : <Play size={13} />}
           {done ? 'Demo complete' : `waypoint ${demo.waypoint + 1}/${TOTAL}`}
         </span>
+
+        {/* step back to the previous revisitable waypoint (◄ / ArrowLeft) */}
+        <button
+          onClick={onBack}
+          disabled={!backOk}
+          title={backOk ? 'Previous waypoint (◄)' : 'Genesis stages are forward-only'}
+          className="flex items-center gap-1 rounded-full border border-cyan-accent/30 px-1.5 py-0.5 text-cyan-accent hover:bg-cyan-accent/10 disabled:cursor-not-allowed disabled:border-white/10 disabled:text-ink-low disabled:opacity-50"
+          aria-label="Previous waypoint"
+        >
+          <ChevronsLeft size={14} />
+        </button>
 
         {/* force-advance (live-stage insurance if anything ever stalls) */}
         {!done && (
@@ -235,6 +255,19 @@ function Hud({ demo }) {
 export default function DemoMode() {
   const demo = useDemo();
   const { on, waypoint, paused, cursorFx } = demo;
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Step back to the previous revisitable waypoint. If its target lives on a
+  // different route (e.g. from the 3D vault back to the report page), navigate
+  // there too — so the spotlight always lands on a real, clickable element.
+  const goBack = () => {
+    const next = stepBackWaypoint(WAYPOINTS);
+    const wp = WAYPOINTS[next.waypoint];
+    if (wp?.route && wp.route !== location.pathname) {
+      navigate(wp.route);
+    }
+  };
 
   // keyboard: D start/toggle · Space pause · [ / ] speed · Esc exit
   useEffect(() => {
@@ -263,11 +296,15 @@ export default function DemoMode() {
       } else if (e.key === 'ArrowRight' && !isTyping()) {
         e.preventDefault();
         advanceWaypoint(TOTAL);
+      } else if (e.key === 'ArrowLeft' && !isTyping()) {
+        e.preventDefault();
+        goBack();
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [on, demo.speed]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [on, demo.speed, location.pathname]);
 
   // presenter's real click on the current target advances the pointer.
   // For inputs (advanceOn:'input') we advance when the field is actually typed into,
@@ -315,7 +352,7 @@ export default function DemoMode() {
     <>
       {!paused && <Spotlight waypoint={waypoint} />}
       <CursorFx enabled={cursorFx && !paused} />
-      <Hud demo={demo} />
+      <Hud demo={demo} onBack={goBack} />
     </>
   );
 }
